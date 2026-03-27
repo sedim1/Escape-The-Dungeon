@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonCrawlerJam2026", "DungeonCrawlerJam2026.csproj", "{D47426F0-7425-4F1A-81D0-13458F4E490B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D47426F0-7425-4F1A-81D0-13458F4E490B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D47426F0-7425-4F1A-81D0-13458F4E490B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D47426F0-7425-4F1A-81D0-13458F4E490B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D47426F0-7425-4F1A-81D0-13458F4E490B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
