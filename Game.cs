@@ -1,3 +1,5 @@
+using DungeonCrawlerJam2026.GameScenes;
+using DungeonCrawlerJam2026.Utilties.Scenes;
 using Raylib_cs;
 
 namespace DungeonCrawlerJam2026;
@@ -5,15 +7,15 @@ namespace DungeonCrawlerJam2026;
 
     public class Game
     {
-        public static int SW;
-        public static int SH;
+        private int sw;
+        private int sh;
         private string title;
 
         public Game(int w, int h, string title)
         {
             this.title = title;
-            SW = w;
-            SH = h;
+            this.sw = w;
+            this.sh = h;
         }
 
         public void Run()
@@ -25,20 +27,27 @@ namespace DungeonCrawlerJam2026;
 
         private void Init()
         {
-            Raylib.InitWindow(SW, SH, title);
+            Raylib.InitWindow(sw, sh, title);
             Raylib.SetTargetFPS(60);
         }
 
         private void End()
         {
+            SceneManager.ClearAllScenes();
             Raylib.CloseWindow();
         }
 
         private void GameLoop()
         {
+            //Add scenes the game will run throughout its lifetime
+            SceneManager.AddScene(new GameTitle(),"title");
+            SceneManager.AddScene(new MainGameScene(),"main");
+            SceneManager.TriggerChange("title");
+            //Start Game loop
             while (!Raylib.WindowShouldClose())
             {
                 float deltaTime = Raylib.GetFrameTime();
+                SceneManager.CheckSceneChange();
                 Update(deltaTime);
                 Render();
             }
@@ -46,12 +55,17 @@ namespace DungeonCrawlerJam2026;
 
         private void Update(float delta)
         {
+            if (SceneManager.currentScene == null)
+                return;
+            SceneManager.currentScene.Update(delta);
         }
 
         private void Render()
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.SkyBlue);
+            if (SceneManager.currentScene != null)
+                SceneManager.currentScene.Draw();
             Raylib.DrawText(Raylib.GetFPS().ToString(), 0, 0, 26, Color.Black);
             Raylib.EndDrawing();
         }
