@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="EdCanHack.Unglide" Version="2.0.0" />
       <PackageReference Include="Raylib-cs" Version="7.0.2" />
     </ItemGroup>
 

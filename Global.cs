@@ -2,5 +2,5 @@ namespace DungeonCrawlerJam2026;
 
 public static class Global
 {
-    public static int GRIDSCALE = 36;
+    public static int GRIDSCALE = 26;
 }
