@@ -40,9 +40,8 @@ namespace DungeonCrawlerJam2026;
         private void GameLoop()
         {
             //Add scenes the game will run throughout its lifetime
-            SceneManager.AddScene(new GameTitle(),"title");
             SceneManager.AddScene(new MainGameScene(),"main");
-            SceneManager.TriggerChange("title");
+            SceneManager.TriggerChange("main");
             //Start Game loop
             while (!Raylib.WindowShouldClose())
             {
@@ -63,10 +62,10 @@ namespace DungeonCrawlerJam2026;
         private void Render()
         {
             Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.SkyBlue);
+            Raylib.ClearBackground(Color.Black);
             if (SceneManager.currentScene != null)
                 SceneManager.currentScene.Draw();
-            Raylib.DrawText(Raylib.GetFPS().ToString(), 0, 0, 26, Color.Black);
+            Raylib.DrawText(Raylib.GetFPS().ToString(), 0, 0, 26, Color.Yellow);
             Raylib.EndDrawing();
         }
     }

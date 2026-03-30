@@ -1,3 +1,4 @@
+using DungeonCrawlerJam2026.GameComponents;
 using DungeonCrawlerJam2026.Utilties.Scenes;
 using Raylib_cs;
 
@@ -5,9 +6,18 @@ namespace DungeonCrawlerJam2026.GameScenes;
 
 public class MainGameScene : Scene
 {
+
+    private GameMap level;
+
+    public MainGameScene()
+    {
+        level = new GameMap();
+    }
+    
     public override void OnEnter()
     {
         Console.WriteLine("Main Scene OnEnter");
+        level.LoadMap("Resources/gamemap.json");
     }
 
     public override void OnExit()
@@ -17,13 +27,9 @@ public class MainGameScene : Scene
 
     public override void Update(float deltaTime)
     {
-        if(Raylib.IsKeyPressed(KeyboardKey.D))
-            SceneManager.TriggerChange("title");
     }
 
     public override void Draw()
     {
-        Raylib.DrawText("Hello from main game scene",0,20,24,Color.Black);
-        Raylib.DrawRectangle(90,90,100,200,Color.Red);
     }
 }
