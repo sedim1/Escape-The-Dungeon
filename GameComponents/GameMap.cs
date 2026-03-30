@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Raylib_cs;
 
 namespace DungeonCrawlerJam2026.GameComponents;
 
@@ -35,7 +36,9 @@ public class GameMap
                 map[y][x] = parser._map[y][x];
                 Console.Write(parser._map[y][x] + " ");
             }
+            Console.WriteLine();
         }
+        Console.WriteLine("Loaded " + map[0].Length + "x" + map.Length + " map");
     }
 
     public int GetWidth()
@@ -54,6 +57,15 @@ public class GameMap
         {
             for (int x = 0; x < map[0].Length; x++)
             {
+                int posX = x * Global.GRIDSCALE;
+                int posY = y * Global.GRIDSCALE;
+                if (map[y][x] > 0)
+                {
+                    Raylib.DrawRectangle(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.White);
+                    Raylib.DrawRectangleLines(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.Gray);
+                }
+                else
+                    Raylib.DrawRectangleLines(posX,posY,Global.GRIDSCALE,Global.GRIDSCALE,Color.Gray);
             }
         }
     }

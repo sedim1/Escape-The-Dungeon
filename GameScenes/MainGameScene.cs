@@ -31,5 +31,6 @@ public class MainGameScene : Scene
 
     public override void Draw()
     {
+        level.DrawMinimap();
     }
 }
