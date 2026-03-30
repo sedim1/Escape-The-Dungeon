@@ -12,6 +12,12 @@ public struct Vector2i
         this.X = x;
         this.Y = y;
     }
+
+    public Vector2i(Vector2 vector)
+    {
+        this.X = (int)vector.X;
+        this.Y = (int)vector.Y;
+    }
     
     public Vector2 CellToWorld()
     {
