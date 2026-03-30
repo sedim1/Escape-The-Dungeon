@@ -1,3 +1,4 @@
+using System.Diagnostics.Tracing;
 using System.Numerics;
 using Raylib_cs;
 using DungeonCrawlerJam2026.Utilties;
@@ -9,9 +10,14 @@ public abstract class Character
     public Vector2i cellPosition;
     public Vector2 worldPosition;
     public float angle;
+    
     public abstract void Enter();
     public abstract void Exit();
-
+    
+    public void UpdateWorldPosition(float speed, float delta)
+    {
+        worldPosition = Raymath.Vector2Lerp(worldPosition, cellPosition.CellToWorld(), delta * speed);
+    }
     private Vector2i GetForwardDirection()
     {
         Vector2 forward = Raymath.Vector2Rotate(new Vector2(1, 0), angle * Raylib.DEG2RAD);
