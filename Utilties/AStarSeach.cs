@@ -61,7 +61,7 @@ public static class AStarSeach
         cellDetails[y, x].f = 0.0;
         cellDetails[y, x].h = 0.0;
         
-        SortedSet<(double, Vector2i)> openList = new SortedSet<(double, Vector2i)>(
+        /*SortedSet<(double, Vector2i)> openList = new SortedSet<(double, Vector2i)>(
             Comparer<(double, Vector2i)>.Create((a, b) =>
                 {
                     int cmp = a.Item1.CompareTo(b.Item1);
@@ -70,9 +70,12 @@ public static class AStarSeach
                     if (cx != 0) return cx;
                     return a.Item2.Y.CompareTo(b.Item2.Y);
                 }
-                ));
+                ));*/
+
+        PriorityQueue<Vector2i, double> openList = new PriorityQueue<Vector2i, double>();
         
-        openList.Add((0.0f, new Vector2i(x, y)));
+        //openList.Add((0.0f, new Vector2i(x, y)));
+        openList.Enqueue(new Vector2i(x,y),0.0f);
 
         bool foundDest = false;
 
@@ -87,11 +90,14 @@ public static class AStarSeach
         //Console.WriteLine("Starting search from: " + startPos.ToString()+" to " + endPos.ToString());
         while (openList.Count > 0)
         {
-            (double f, Vector2i pair) p = openList.Min;
-            openList.Remove(p);
+            //(double f, Vector2i pair) p = openList.Min;
+            //openList.Remove(p);
+            Vector2i pair = openList.Peek();
+            openList.Dequeue();
+            
             //Add this vertex to the closed list
-            x = p.pair.X;
-            y = p.pair.Y;
+            x = pair.X;
+            y = pair.Y;
             Vector2i current = new Vector2i(x, y);
             //Console.WriteLine("Current cell: " + current.ToString());
             closedList[y, x] = true;
@@ -137,7 +143,8 @@ public static class AStarSeach
                 if ( cellDetails[newY,newX].f ==  double.MaxValue || cellDetails[newY, newX].f > newF)
                 {
                     //Console.WriteLine("Cell added");
-                    openList.Add((newF, succesor));
+                    //openList.Add((newF, succesor));
+                    openList.Enqueue(new Vector2i(newX, newY), newF);
                     //Update details of this cell
                     cellDetails[succesor.Y, succesor.X].f = newF;
                     cellDetails[succesor.Y, succesor.X].g = newG;
