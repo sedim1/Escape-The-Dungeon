@@ -21,4 +21,17 @@ public static class GameRenderer
             }
         }
     }
+
+    public static void DebugEnemyPathFinding(GameMap map, CharacterManager manager)
+    {
+        Player player = manager.GetPlayer();
+        if (player == null)
+            return;
+        foreach (Character character in manager.GetCharacters())
+        {
+            if (Object.ReferenceEquals(player, character))
+                continue;
+            AStarSeach.DebugPath(map,manager.GetCharacters(),character,player);
+        }
+    }
 }
