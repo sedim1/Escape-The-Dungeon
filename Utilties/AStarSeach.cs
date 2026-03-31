@@ -21,17 +21,26 @@ public static class AStarSeach
             return;
         }
 
-        int i = 0;
+       // int i = 0;
         while (path.Count > 0)
         {
             Vector2i position = path.Peek();
             path.Pop();
             Vector2 worldPosition = position.CellToWorld();
             Raylib.DrawCircleV(worldPosition,Global.GRIDSCALE/2/2/2,Color.Yellow);
-            if (i == 1)
-                Console.WriteLine("First step after src: " + position.ToString());
-            i += 1;
+           // if (i == 1)
+             //   Console.WriteLine("First step after src: " + position.ToString());
+            //i += 1;
         }
+    }
+
+    public static Vector2i GetNextStep(GameMap map, List<Character> caracters, Character src, Character dest)
+    {
+        Stack<Vector2i> path = AStar(map, caracters, src, dest);
+        if (path == null)
+            return new Vector2i(0,0);
+        path.Pop();
+        return path.Peek();
     }
     
     public static Stack<Vector2i> AStar(GameMap map,List<Character> characters,Character src, Character dest)

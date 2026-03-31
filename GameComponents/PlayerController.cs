@@ -63,6 +63,7 @@ public static class PlayerController
         if (inputMovement)
         {
             player.TriggerMovement();
+            MovementSystem.ProcessEnemiesActions(map,player,characterManager.GetCharacters());
             return;
         }
     }

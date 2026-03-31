@@ -1,3 +1,4 @@
+using DungeonCrawlerJam2026.Characters;
 using DungeonCrawlerJam2026.Utilties;
 
 namespace DungeonCrawlerJam2026.GameComponents;
@@ -42,5 +43,14 @@ public static class MovementSystem
         bool outY = position.Y < 0 || position.Y >= map.GetHeight();
         return (outX || outY);
     }
-    
+
+    public static void ProcessEnemiesActions(GameMap map,Player player, List<Character> characters)
+    {
+        foreach (Character enemy in characters)
+        {
+            if(enemy is Player)
+                continue;
+            (enemy as Enemy).ProcessAction(map,characters,player);
+        }
+    }
 }

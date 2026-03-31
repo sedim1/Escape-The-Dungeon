@@ -10,12 +10,6 @@ public class Enemy : Character
     {
         this.cellPosition = position;
     }
-
-    public void SetPosition(Vector2i position)
-    {
-        this.cellPosition = position;
-        isMoving = true;
-    }
     
     public override void Enter()
     {
@@ -27,5 +21,25 @@ public class Enemy : Character
     {
         Console.WriteLine("Exiting enemy");
     }
-    
+
+    public void ProcessAction(GameMap map,List<Character> characters,Player player)
+    {
+        bool flagAttack = false;
+        if(isMoving)
+            return;
+        //Attack if possible
+        if (flagAttack)
+        {
+            
+        }
+        else //Follo player if alerted
+        {
+            Vector2i nextPosition = AStarSeach.GetNextStep(map, characters, this, player);
+            if (nextPosition.Equals(new Vector2i(0, 0)) || nextPosition.Equals(player.cellPosition))
+                return;
+            t = 0.0f;
+            isMoving = true;
+            cellPosition = nextPosition;
+        }
+    }
 }
