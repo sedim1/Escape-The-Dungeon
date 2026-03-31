@@ -21,12 +21,16 @@ public static class AStarSeach
             return;
         }
 
+        int i = 0;
         while (path.Count > 0)
         {
             Vector2i position = path.Peek();
             path.Pop();
             Vector2 worldPosition = position.CellToWorld();
             Raylib.DrawCircleV(worldPosition,Global.GRIDSCALE/2/2/2,Color.Yellow);
+            if (i == 1)
+                Console.WriteLine("First step after src: " + position.ToString());
+            i += 1;
         }
     }
     

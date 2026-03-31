@@ -9,8 +9,14 @@ public class Enemy : Character
     public Enemy(Vector2i position)
     {
         this.cellPosition = position;
-        angle = 270.0f;
     }
+
+    public void SetPosition(Vector2i position)
+    {
+        this.cellPosition = position;
+        isMoving = true;
+    }
+    
     public override void Enter()
     {
         Console.WriteLine("Entering Enemy");
@@ -21,4 +27,5 @@ public class Enemy : Character
     {
         Console.WriteLine("Exiting enemy");
     }
+    
 }

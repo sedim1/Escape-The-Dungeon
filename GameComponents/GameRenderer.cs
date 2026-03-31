@@ -12,12 +12,11 @@ public static class GameRenderer
             if (character is Enemy)
             {
                 Raylib.DrawCircleV(character.worldPosition,Global.GRIDSCALE/2/2,Color.Red);
-                Raylib.DrawLineEx(character.worldPosition,character.worldPosition+Raymath.Vector2Scale(character.GetDirection(),Global.GRIDSCALE/2),2,Color.Red);
             }
-            else
+            else if (character is Player)
             {
                 Raylib.DrawCircleV(character.worldPosition,Global.GRIDSCALE/2/2,Color.Blue);
-                Raylib.DrawLineEx(character.worldPosition,character.worldPosition+Raymath.Vector2Scale(character.GetDirection(),Global.GRIDSCALE/2),2,Color.Blue);
+                Raylib.DrawLineEx(character.worldPosition,character.worldPosition+Raymath.Vector2Scale((character as Player).GetDirection(),Global.GRIDSCALE/2),2,Color.Blue);
             }
         }
     }
