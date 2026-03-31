@@ -1,4 +1,5 @@
 using DungeonCrawlerJam2026.Characters;
+using DungeonCrawlerJam2026.Utilties;
 using Raylib_cs;
 using Unglide;
 
@@ -6,7 +7,7 @@ namespace DungeonCrawlerJam2026.GameComponents;
 
 public static class PlayerController
 {
-    public static void ProcessInput(CharacterManager characterManager)
+    public static void ProcessInput(CharacterManager characterManager,GameMap map)
     {
         Player player = characterManager.GetPlayer();
         if (player == null)
@@ -28,21 +29,33 @@ public static class PlayerController
         
         if (Raylib.IsKeyPressed(KeyboardKey.W))
         {
+            Vector2i nextPosition = player.cellPosition.Add(player.GetForwardDirection());
+            if (!MovementSystem.isValidMove(map,player,characterManager.GetCharacters(),nextPosition))
+                return;
             inputMovement = true;
             player.moveForward();
         }
         else if (Raylib.IsKeyPressed(KeyboardKey.S))
         {
+            Vector2i nextPosition = player.cellPosition.Add(player.GetBackDirection());
+            if (!MovementSystem.isValidMove(map,player,characterManager.GetCharacters(),nextPosition))
+                return;
             inputMovement = true;
             player.moveBackward();
         } 
         else if (Raylib.IsKeyPressed(KeyboardKey.A))
         {
+            Vector2i nextPosition = player.cellPosition.Add(player.GetLeftDirection());
+            if (!MovementSystem.isValidMove(map,player,characterManager.GetCharacters(),nextPosition))
+                return;
             inputMovement = true;
             player.moveLeft();
         } 
         else if (Raylib.IsKeyPressed(KeyboardKey.D))
         {
+            Vector2i nextPosition = player.cellPosition.Add(player.GetRightDirection());
+            if (!MovementSystem.isValidMove(map,player,characterManager.GetCharacters(),nextPosition))
+                return;
             inputMovement = true;
             player.moveRight();
         }

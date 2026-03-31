@@ -23,6 +23,7 @@ public class MainGameScene : Scene
         Console.WriteLine("Main Scene OnEnter");
         level.LoadMap("Resources/gamemap.json");
         characterManager.AddCharacter(new Player(new Vector2i(1,1),0));
+        characterManager.AddCharacter(new Enemy(new Vector2i(2,3)));
     }
 
     public override void OnExit()
@@ -33,7 +34,7 @@ public class MainGameScene : Scene
 
     public override void Update(float deltaTime)
     {
-        PlayerController.ProcessInput(characterManager);
+        PlayerController.ProcessInput(characterManager,level);
         MovementSystem.UpdateCharactersPositions(characterManager.GetCharacters(), deltaTime);
     }
 

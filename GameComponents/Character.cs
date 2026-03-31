@@ -31,10 +31,31 @@ public abstract class Character
         isMoving = false;
     }
     
-    private Vector2i GetForwardDirection()
+    public Vector2i GetForwardDirection()
     {
         Vector2 forward = Raymath.Vector2Rotate(new Vector2(1, 0), angle * Raylib.DEG2RAD);
         return new Vector2i(forward);
+    }
+
+    public Vector2i GetLeftDirection()
+    {
+        Vector2i forward = GetForwardDirection();
+        Vector2i left = new Vector2i(forward.Y, -forward.X);
+        return left;
+    }
+
+    public Vector2i GetRightDirection()
+    {
+        
+        Vector2i forward = GetForwardDirection();
+        Vector2i right = new Vector2i(-forward.Y, forward.X);
+        return right;
+    }
+
+    public Vector2i GetBackDirection()
+    {
+        Vector2i forward = GetForwardDirection();
+        return forward.negative();
     }
 
     public void TriggerMovement()
@@ -53,6 +74,7 @@ public abstract class Character
         cellPosition.X += forward.X;
         cellPosition.Y += forward.Y;
     }
+    
 
     public void moveBackward()
     {

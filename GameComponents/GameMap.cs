@@ -15,7 +15,8 @@ class GameMapParser
 
 public class GameMap
 {
-    private int[][] map;
+    private int[,] map;
+    private int width, height;
     public void LoadMap(string fileName)
     {
         GameMapParser parser = new GameMapParser();
@@ -27,39 +28,39 @@ public class GameMap
 
     private void SetUpMap(GameMapParser parser)
     {
-        map = new int[parser._height][];
-        for (int y = 0; y < parser._height; y++)
-        {
-            map[y] = new int[parser._width];
-            for (int x = 0; x < parser._width; x++)
-            {
-                map[y][x] = parser._map[y][x];
-                Console.Write(parser._map[y][x] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine("Loaded " + map[0].Length + "x" + map.Length + " map");
+        width = parser._width;
+        height = parser._height;
+        map = new int[parser._width,parser._height];
+        for(int y = 0; y < parser._height; y++)
+            for(int x = 0; x < parser._width; x++)
+                map[y,x] = parser._map[y][x];
+            
+    }
+
+    public bool positionIsFloor(int x, int y)
+    {
+        return map[y,x] == 0;
     }
 
     public int GetWidth()
     {
-        return map[0].Length;
+        return width;
     }
 
     public int GetHeight()
     {
-        return map.Length;
+        return height;
     }
 
     public void DrawMinimap()
     {
-        for (int y = 0; y < map.Length; y++)
+        for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < map[0].Length; x++)
+            for (int x = 0; x < width; x++)
             {
                 int posX = x * Global.GRIDSCALE;
                 int posY = y * Global.GRIDSCALE;
-                if (map[y][x] > 0)
+                if (map[y,x] > 0)
                 {
                     Raylib.DrawRectangle(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.White);
                     Raylib.DrawRectangleLines(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.Gray);
