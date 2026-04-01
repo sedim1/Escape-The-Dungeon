@@ -1,3 +1,4 @@
+using System.Numerics;
 using DungeonCrawlerJam2026.Characters;
 using DungeonCrawlerJam2026.Utilties;
 using Raylib_cs;
@@ -5,7 +6,7 @@ namespace DungeonCrawlerJam2026.GameComponents;
 
 public static class GameRenderer
 {
-    public static void DrawCharactersOnMinipap(List<Character> characters)
+    private static void DrawCharactersOnMinipap(List<Character> characters)
     {
         foreach (Character character in characters)
         {
@@ -40,9 +41,38 @@ public static class GameRenderer
         }
         DrawCharactersOnMinipap(characters);
     }
-    public static void Render3DWorld(Game map,List<Character> characters)
+    public static void Render3DWorld(GameMap map,List<Character> characters)
     {
+        Raylib.DrawGrid(100,Global.GRIDSCALE);
+        for (int y = 0; y < map.GetHeight(); y++)
+        {
+            for (int x = 0; x < map.GetWidth(); x++)
+            {
+                float posX = x * Global.GRIDSCALE + Global.GRIDSCALE/2;
+                float posZ = y * Global.GRIDSCALE + Global.GRIDSCALE/2;
+                if (map.GetMap()[y, x] == 0)
+                {
+                    Raylib.DrawPlane(new Vector3(posX,0,posZ),new Vector2(Global.GRIDSCALE,Global.GRIDSCALE),Color.DarkGray);
+                }
+                else
+                {
+                    Raylib.DrawCube(new Vector3(posX,Global.GRIDSCALE/2,posZ),Global.GRIDSCALE,Global.GRIDSCALE,Global.GRIDSCALE,Color.White);
+                }
+            }
+        }
         
+        RenderCharactersIn3DWorld(characters);
+    }
+
+    private static void RenderCharactersIn3DWorld(List<Character> characters)
+    {
+        foreach (Character character in characters)
+        {
+            if (character is Player)
+                continue;
+            Vector3 position = new Vector3(character.worldPosition.X,Global.GRIDSCALE/2,character.worldPosition.Y);
+            Raylib.DrawSphere(position,Global.GRIDSCALE/2/2,Color.Red);
+        }
     }
 
     public static void DebugEnemyPathFinding(GameMap map, CharacterManager manager)
