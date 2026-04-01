@@ -46,6 +46,8 @@ public class MainGameScene : Scene
         level.LoadMap("Resources/gamemap.json");
         characterManager.AddCharacter(new Player(new Vector2i(8,8),270));
         characterManager.AddCharacter(new Enemy(new Vector2i(3,5)));
+        characterManager.AddCharacter(new Enemy(new Vector2i(1,1)));
+        characterManager.AddCharacter(new Enemy(new Vector2i(5,3)));
     }
 
     public override void OnExit()
@@ -58,6 +60,7 @@ public class MainGameScene : Scene
 
     public override void Update(float deltaTime)
     {
+        characterManager.DeleteDefetaedEnemies();
         PlayerController.ProcessInput(characterManager,level);
         MovementSystem.UpdateCharactersPositions(characterManager.GetCharacters(), deltaTime);
     }

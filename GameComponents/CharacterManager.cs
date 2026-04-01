@@ -29,7 +29,19 @@ public class CharacterManager
             character.Exit();
         characters.Clear();
     }
-    
+
+    public void DeleteDefetaedEnemies()
+    {
+        for (int i = characters.Count -1; i >= 0; i--)
+        {
+            if (characters[i] is Player)
+                continue;
+            if(!characters[i].getHealthComponent().isDepleted())
+                continue;
+            characters[i].Exit();
+            characters.RemoveAt(i);
+        }
+    }
     
     private bool isPlayer(Character character)
     {
