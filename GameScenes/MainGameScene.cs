@@ -24,8 +24,6 @@ public class MainGameScene : Scene
         level.LoadMap("Resources/gamemap.json");
         characterManager.AddCharacter(new Player(new Vector2i(8,8),0));
         characterManager.AddCharacter(new Enemy(new Vector2i(3,5)));
-        characterManager.AddCharacter(new Enemy(new Vector2i(2,1)));
-        characterManager.AddCharacter(new Enemy(new Vector2i(1,1)));
     }
 
     public override void OnExit()
@@ -45,5 +43,6 @@ public class MainGameScene : Scene
         level.DrawMinimap();
         GameRenderer.DrawCharactersOnMinipap(characterManager.GetCharacters());
         GameRenderer.DebugEnemyPathFinding(level,characterManager);
+        Raylib.DrawText("PlayerHealth: " + characterManager.GetPlayer().getHealthComponent().getHealth().ToString(),0,0,30,Color.Red);
     }
 }

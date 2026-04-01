@@ -13,8 +13,14 @@ public class Player : Character
     {
         this.cellPosition = position;
         this.angle = angle;
+        this.healthComponent = new HealthComponent(100, 100);
     }
-   
+
+    public override TypeComponent GetTypeComonent()
+    {
+        return new DefaultTypeComponent();
+    }
+
 
     public override void Enter()
     {
@@ -101,5 +107,10 @@ public class Player : Character
     public void turnLeft()
     {
         angle = Raymath.Wrap(angle-90, 0, 360);
+    }
+
+    public override string ToString()
+    {
+        return "Character player";
     }
 }

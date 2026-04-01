@@ -65,7 +65,6 @@ namespace DungeonCrawlerJam2026;
             Raylib.ClearBackground(Color.Black);
             if (SceneManager.currentScene != null)
                 SceneManager.currentScene.Draw();
-            Raylib.DrawText(Raylib.GetFPS().ToString(), 0, 0, 26, Color.Yellow);
             Raylib.EndDrawing();
         }
     }

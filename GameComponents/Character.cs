@@ -9,8 +9,10 @@ namespace DungeonCrawlerJam2026.GameComponents;
 
 public abstract class Character
 {
+    protected HealthComponent healthComponent;
     public Vector2i cellPosition;
     public Vector2 worldPosition;
+    
     public float angle;
     public bool isMoving = false;
     protected float t = 0.0f;
@@ -18,6 +20,12 @@ public abstract class Character
     public abstract void Enter();
     public abstract void Exit();
 
+    public HealthComponent getHealthComponent()
+    {
+        return healthComponent;
+    }
+    public abstract TypeComponent GetTypeComonent();
+    
     public void UpdateWorldPosition(float delta)
     {
         if (!isMoving)

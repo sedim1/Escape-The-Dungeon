@@ -5,12 +5,19 @@ namespace DungeonCrawlerJam2026.Characters;
 
 public class Enemy : Character
 {
-
+    public AttackComponent attackComponent;
     public Enemy(Vector2i position)
     {
         this.cellPosition = position;
+        attackComponent = new AttackComponent(new DefaultTypeComponent(), 5, 1);
+        this.healthComponent = new HealthComponent(100, 100);
     }
-    
+
+    public override TypeComponent GetTypeComonent()
+    {
+        return  attackComponent.typeComponent;
+    }
+
     public override void Enter()
     {
         Console.WriteLine("Entering Enemy");
@@ -24,13 +31,11 @@ public class Enemy : Character
 
     public void ProcessAction(GameMap map,List<Character> characters,Player player)
     {
-        bool flagAttack = false;
-        if(isMoving)
-            return;
+        bool flagAttack = attackComponent.isInRange(this, player);
         //Attack if possible
         if (flagAttack)
         {
-            
+            attackComponent.Attack(player);
         }
         else //Follo player if alerted
         {
