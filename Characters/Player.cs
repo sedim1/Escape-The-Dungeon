@@ -2,26 +2,20 @@ using System.Numerics;
 using DungeonCrawlerJam2026.GameComponents;
 using DungeonCrawlerJam2026.Utilties;
 using Raylib_cs;
-using Unglide;
 
 namespace DungeonCrawlerJam2026.Characters;
 
 public class Player : Character
 {
-    
+    private Weapon currentWeapon;
     public Player(Vector2i position, float angle)
     {
         this.cellPosition = position;
         this.angle = angle;
         this.healthComponent = new HealthComponent(100, 100);
+        currentWeapon = new Sword();
     }
-
-    public override TypeComponent GetTypeComonent()
-    {
-        return new DefaultTypeComponent();
-    }
-
-
+    
     public override void Enter()
     {
         Console.WriteLine("Entering Player");
@@ -107,6 +101,18 @@ public class Player : Character
     public void turnLeft()
     {
         angle = Raymath.Wrap(angle-90, 0, 360);
+    }
+
+    public void TriggerAttack(List<Character> characters)
+    {
+        foreach (Character character in characters)
+        {
+            if (character is Player)
+                continue;
+            if(!currentWeapon.GetAttackComponent().isInRange(this,character))
+                continue;
+            currentWeapon.GetAttackComponent().Attack(character);
+        }
     }
 
     public override string ToString()

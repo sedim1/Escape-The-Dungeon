@@ -1,15 +1,13 @@
-using System.Diagnostics.Tracing;
 using System.Numerics;
 using Raylib_cs;
 using DungeonCrawlerJam2026.Utilties;
-using Unglide;
 
 namespace DungeonCrawlerJam2026.GameComponents;
-
 
 public abstract class Character
 {
     protected HealthComponent healthComponent;
+    protected TypeComponent typeComponent;
     public Vector2i cellPosition;
     public Vector2 worldPosition;
     
@@ -24,7 +22,11 @@ public abstract class Character
     {
         return healthComponent;
     }
-    public abstract TypeComponent GetTypeComonent();
+
+    public TypeComponent GetTypeComonent()
+    {
+        return typeComponent;
+    }
     
     public void UpdateWorldPosition(float delta)
     {

@@ -1,3 +1,4 @@
+using DungeonCrawlerJam2026.Characters;
 using DungeonCrawlerJam2026.Utilties;
 
 namespace DungeonCrawlerJam2026.GameComponents;
@@ -18,16 +19,17 @@ public class AttackComponent
     public void Attack(Character target)
     {
         int baseDamage = damage;
-        Console.WriteLine("Attacking on: " + target.ToString());
-        Console.WriteLine("Before: "+target.getHealthComponent().getHealth().ToString());
         //Make damage to the arget
         target.getHealthComponent().decrease(baseDamage);
-        Console.WriteLine("After: " + target.getHealthComponent().getHealth().ToString());
+        if (!(target is Player))
+        {
+            Console.WriteLine("Attacking on: " + target.ToString());
+            Console.WriteLine("Health remaining: " + target.getHealthComponent().getHealth().ToString());
+        }
     }
-    
-    public bool isInRange(Character src, Character target)
-    {
-        bool flag = false;
+
+    private bool playerInRange(Character src, Character target)
+    {bool flag = false;
         Vector2i[] directions = new Vector2i[]
         {
             new Vector2i(1,0),
@@ -52,5 +54,30 @@ public class AttackComponent
             }
         }
         return flag;
+    }
+
+    private bool enemyIsInRange(Character src, Character target)
+    {
+        bool flag = false;
+        Vector2i direction = (src as Player).GetForwardDirection();
+        Vector2i startPos = src.cellPosition;
+        for(int i = 1; i <= range; i++)
+        {
+            Vector2i currentPos = new Vector2i(startPos.X + (direction.X * i), startPos.Y + (direction.Y * i));
+            if (currentPos.Equals(target.cellPosition))
+            {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+    
+    public bool isInRange(Character src, Character target)
+    {
+        if (src is Player)
+            return enemyIsInRange(src, target);
+        else
+            return playerInRange(src, target);
     }
 }

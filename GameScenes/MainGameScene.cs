@@ -42,7 +42,6 @@ public class MainGameScene : Scene
     {
         level.DrawMinimap();
         GameRenderer.DrawCharactersOnMinipap(characterManager.GetCharacters());
-        GameRenderer.DebugEnemyPathFinding(level,characterManager);
         Raylib.DrawText("PlayerHealth: " + characterManager.GetPlayer().getHealthComponent().getHealth().ToString(),0,0,30,Color.Red);
     }
 }

@@ -15,13 +15,13 @@ public static class MovementSystem
     {
         if (OutOfBounds(map, position))
         {
-            Console.WriteLine("position: " + position.ToString() + " is out of bounds");
+            //Console.WriteLine("position: " + position.ToString() + " is out of bounds");
             return false;
         }
 
         if (!map.positionIsFloor(position.X, position.Y))
         {
-            Console.WriteLine("position: " + position.ToString() + " is a wall");
+            //Console.WriteLine("position: " + position.ToString() + " is a wall");
             return false;
         }
 
@@ -31,7 +31,7 @@ public static class MovementSystem
                 continue;
             if (position.Equals(c.cellPosition))
             {
-                Console.WriteLine("position: " + position.ToString() + " is already occupied by another character");
+                //Console.WriteLine("position: " + position.ToString() + " is already occupied by another character");
                 return false;
             }
         }

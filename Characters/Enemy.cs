@@ -10,13 +10,10 @@ public class Enemy : Character
     {
         this.cellPosition = position;
         attackComponent = new AttackComponent(new DefaultTypeComponent(), 5, 1);
+        typeComponent = new DefaultTypeComponent();
         this.healthComponent = new HealthComponent(100, 100);
     }
 
-    public override TypeComponent GetTypeComonent()
-    {
-        return  attackComponent.typeComponent;
-    }
 
     public override void Enter()
     {

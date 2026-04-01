@@ -1,7 +1,6 @@
 using DungeonCrawlerJam2026.Characters;
 using DungeonCrawlerJam2026.Utilties;
 using Raylib_cs;
-using Unglide;
 
 namespace DungeonCrawlerJam2026.GameComponents;
 
@@ -16,7 +15,6 @@ public static class PlayerController
         if (player.isMoving)
             return;
         bool inputMovement = false;
-        
         //Movement Input
         if (Raylib.IsKeyPressed(KeyboardKey.Q))
         {
@@ -77,12 +75,17 @@ public static class PlayerController
             inputMovement = true;
             player.moveRight();
         }
-
         if (inputMovement)
         {
             player.TriggerMovement();
             MovementSystem.ProcessEnemiesActions(map,player,characterManager.GetCharacters());
             return;
+        }
+        //Attack Input
+        if (Raylib.IsKeyPressed(KeyboardKey.J))
+        {
+            player.TriggerAttack(characterManager.GetCharacters());
+            MovementSystem.ProcessEnemiesActions(map,player,characterManager.GetCharacters());
         }
     }
 }
