@@ -87,5 +87,19 @@ public static class PlayerController
             player.TriggerAttack(characterManager.GetCharacters());
             MovementSystem.ProcessEnemiesActions(map,player,characterManager.GetCharacters());
         }
+        //Inventory Input
+        if (Raylib.IsKeyPressed(KeyboardKey.U))
+        {
+            player.weapons.changeWeapon(0);
+        }
+        if (Raylib.IsKeyPressed(KeyboardKey.I))
+        {
+            player.weapons.changeWeapon(1);
+        }
+
+        if (Raylib.IsKeyPressed(KeyboardKey.O))
+        {
+            player.weapons.changeWeapon(2);
+        }
     }
 }

@@ -17,3 +17,11 @@ public class Sword : Weapon
         attackComponent = new AttackComponent(new DefaultTypeComponent(), 5, 1);
     }
 }
+
+public class Bow : Weapon
+{
+    public Bow()
+    {
+        attackComponent = new AttackComponent(new DefaultTypeComponent(), 5, 5);
+    }
+}
