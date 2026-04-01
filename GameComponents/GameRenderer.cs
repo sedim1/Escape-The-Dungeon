@@ -21,6 +21,30 @@ public static class GameRenderer
         }
     }
 
+    public static void RenderWorld2D(GameMap map, List<Character> characters)
+    {
+        for (int y = 0; y < map.GetHeight(); y++)
+        {
+            for (int x = 0; x < map.GetWidth(); x++)
+            {
+                int posX = x * Global.GRIDSCALE;
+                int posY = y * Global.GRIDSCALE;
+                if (map.GetMap()[y,x] > 0)
+                {
+                    Raylib.DrawRectangle(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.White);
+                    Raylib.DrawRectangleLines(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.Gray);
+                }
+                else
+                    Raylib.DrawRectangleLines(posX,posY,Global.GRIDSCALE,Global.GRIDSCALE,Color.Gray);
+            }
+        }
+        DrawCharactersOnMinipap(characters);
+    }
+    public static void Render3DWorld(Game map,List<Character> characters)
+    {
+        
+    }
+
     public static void DebugEnemyPathFinding(GameMap map, CharacterManager manager)
     {
         Player player = manager.GetPlayer();

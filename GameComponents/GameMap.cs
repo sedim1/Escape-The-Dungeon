@@ -52,22 +52,9 @@ public class GameMap
         return height;
     }
 
-    public void DrawMinimap()
+    public int[,] GetMap()
     {
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                int posX = x * Global.GRIDSCALE;
-                int posY = y * Global.GRIDSCALE;
-                if (map[y,x] > 0)
-                {
-                    Raylib.DrawRectangle(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.White);
-                    Raylib.DrawRectangleLines(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.Gray);
-                }
-                else
-                    Raylib.DrawRectangleLines(posX,posY,Global.GRIDSCALE,Global.GRIDSCALE,Color.Gray);
-            }
-        }
+        return map;
     }
+    
 }

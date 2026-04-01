@@ -62,7 +62,7 @@ namespace DungeonCrawlerJam2026;
         private void Render()
         {
             Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.Black);
+            Raylib.ClearBackground(Color.SkyBlue);
             if (SceneManager.currentScene != null)
                 SceneManager.currentScene.Draw();
             Raylib.EndDrawing();
