@@ -20,6 +20,17 @@ public class AttackComponent
     {
         int baseDamage = damage;
         //Make damage to the arget
+        if (typeComponent.isStrongAgainst(target.GetTypeComonent()))
+        {
+            Console.WriteLine("Its super effecive!!");
+            baseDamage = damage * 2;
+        }
+        else if (typeComponent.isWeakAgainst(target.GetTypeComonent()))
+        {
+            Console.WriteLine("Its not very effective....");
+            baseDamage = damage / 2;
+        }
+
         target.getHealthComponent().decrease(baseDamage);
         if (!(target is Player))
         {
