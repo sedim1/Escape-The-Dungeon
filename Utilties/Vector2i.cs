@@ -35,6 +35,13 @@ public struct Vector2i
         return new Vector2i(X + vector.X, Y + vector.Y);
     }
 
+    public float distanceFrom(Vector2i vector)
+    {
+        int dx = X - vector.X;
+        int dy = Y - vector.Y;
+        return (float)Math.Sqrt(dx * dx + dy * dy);
+    }
+
     public override bool Equals(Object obj)
     {
         if (obj == null)
@@ -44,7 +51,8 @@ public struct Vector2i
         Vector2i other = (Vector2i)obj;
         return X == other.X && Y == other.Y;
     }
-
+    
+    
     public override string ToString()
     {
         return $"({X}, {Y})";

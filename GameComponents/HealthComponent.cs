@@ -29,6 +29,10 @@ public class HealthComponent
         return health <= 0;
     }
 
+    public int getMaxHealth()
+    {
+        return maxHealth;
+    }
     public int getHealth()
     {
         return health;

@@ -71,8 +71,6 @@ public static class GameRenderer
                 
                 if (map.GetMap()[y,x] == 1)
                 {
-                    //Raylib.DrawRectangle(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.White);
-                    //Raylib.DrawRectangleLines(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.Gray);
                     Raylib.DrawTexturePro(wallTex,srcRect,destRect,Raymath.Vector2Zero(),0.0f,Color.White);
                 }
                 else if (map.GetMap()[y, x] == 0)
@@ -82,7 +80,6 @@ public static class GameRenderer
                 else if (map.GetMap()[y,x] == 2)
                 {
                     Raylib.DrawTexturePro(exitTex,srcRect,destRect,Raymath.Vector2Zero(),0.0f,Color.White);
-                    //Raylib.DrawRectangleLines(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.Gray);
                 }
             }
         }
@@ -99,7 +96,6 @@ public static class GameRenderer
                 float posZ = y * Global.GRIDSCALE;
                 if (map.GetMap()[y, x] == 0)
                 {
-                    //Raylib.DrawPlane(new Vector3(posX,0,posZ),new Vector2(Global.GRIDSCALE,Global.GRIDSCALE),Color.DarkGray);
                     DrawTexturePlaneTile(floorTex,new Vector3(posX,0.0f,posZ),Vector3.UnitY,Color.White);
                     posX += Global.GRIDSCALE/2;
                     posZ += Global.GRIDSCALE / 2;
@@ -128,7 +124,7 @@ public static class GameRenderer
             Raylib.DrawBillboard(camera,sprite,position,5.0f,Color.White);
         }
     }
-
+    
     public static void DebugEnemyPathFinding(GameMap map, CharacterManager manager)
     {
         Player player = manager.GetPlayer();
@@ -147,7 +143,6 @@ public static class GameRenderer
         Rlgl.SetTexture(texture.Id);
         Rlgl.Begin(DrawMode.Quads);
         Rlgl.Color4ub(color.R, color.G, color.B, color.A);
-        
         Rlgl.Normal3f(normal.X, normal.Y, normal.Z);
         //TopLeft
         Rlgl.TexCoord2f(0.0f,0.0f);
@@ -161,7 +156,6 @@ public static class GameRenderer
         //TopRight
         Rlgl.TexCoord2f(1.0f,0.0f);
         Rlgl.Vertex3f(position.X + Global.GRIDSCALE, position.Y, position.Z);
-        
         Rlgl.End();
         Rlgl.SetTexture(0);
     }
@@ -198,7 +192,6 @@ public static class GameRenderer
         Rlgl.TexCoord2f(0.0f, 1.0f);
         // Top Left Of The Texture and Quad
         Rlgl.Vertex3f(x - width / 2, y + height / 2, z + length / 2);
-
         // Back Face
         // Normal Pointing Away From Viewer
         Rlgl.Normal3f(0.0f, 0.0f, -1.0f);
@@ -214,7 +207,6 @@ public static class GameRenderer
         Rlgl.TexCoord2f(0.0f, 0.0f);
         // Bottom Left Of The Texture and Quad
         Rlgl.Vertex3f(x + width / 2, y - height / 2, z - length / 2);
-
         // Top Face
         // Normal Pointing Up
         Rlgl.Normal3f(0.0f, 1.0f, 0.0f);
@@ -230,7 +222,6 @@ public static class GameRenderer
         Rlgl.TexCoord2f(1.0f, 1.0f);
         // Top Right Of The Texture and Quad
         Rlgl.Vertex3f(x + width / 2, y + height / 2, z - length / 2);
-
         // Bottom Face
         // Normal Pointing Down
         Rlgl.Normal3f(0.0f, -1.0f, 0.0f);
@@ -246,7 +237,6 @@ public static class GameRenderer
         Rlgl.TexCoord2f(1.0f, 0.0f);
         // Bottom Right Of The Texture and Quad
         Rlgl.Vertex3f(x - width / 2, y - height / 2, z + length / 2);
-
         // Right face
         // Normal Pointing Right
         Rlgl.Normal3f(1.0f, 0.0f, 0.0f);
@@ -262,7 +252,6 @@ public static class GameRenderer
         Rlgl.TexCoord2f(0.0f, 0.0f);
         // Bottom Left Of The Texture and Quad
         Rlgl.Vertex3f(x + width / 2, y - height / 2, z + length / 2);
-
         // Left Face
         // Normal Pointing Left
         Rlgl.Normal3f(-1.0f, 0.0f, 0.0f);
