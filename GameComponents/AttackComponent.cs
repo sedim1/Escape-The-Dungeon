@@ -16,6 +16,11 @@ public class AttackComponent
         this.range = range;
     }
 
+    public void setTypeComponent(TypeComponent typeComponent)
+    {
+        this.typeComponent = typeComponent;
+    }
+
     public void Attack(Character target)
     {
         int baseDamage = damage;

@@ -21,8 +21,8 @@ public class Player : Character
     {
         Console.WriteLine("Entering Player");
         worldPosition = cellPosition.CellToWorld();
-        weapons.AddWeapon(new Sword());
-        weapons.AddWeapon(new Bow());
+        weapons.AddWeapon(new Sword(new FireTypeComponent()));
+        weapons.AddWeapon(new Bow(new GrassTypeComponent()));
     }
     public override void Exit()
     {

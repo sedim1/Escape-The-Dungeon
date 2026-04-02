@@ -12,16 +12,24 @@ public class Weapon
 
 public class Sword : Weapon
 {
-    public Sword()
+    public Sword(TypeComponent typeComponent)
     {
-        attackComponent = new AttackComponent(new DefaultTypeComponent(), 5, 1);
+        attackComponent = new AttackComponent(typeComponent, 5, 1);
+    }
+}
+
+public class Whip : Weapon
+{
+    public Whip(TypeComponent typeComponent)
+    {
+        attackComponent = new AttackComponent(typeComponent, 5, 1);
     }
 }
 
 public class Bow : Weapon
 {
-    public Bow()
+    public Bow(TypeComponent typeComponent)
     {
-        attackComponent = new AttackComponent(new DefaultTypeComponent(), 5, 5);
+        attackComponent = new AttackComponent(typeComponent, 5, 5);
     }
 }
