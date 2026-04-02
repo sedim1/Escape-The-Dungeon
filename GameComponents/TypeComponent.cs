@@ -1,3 +1,5 @@
+using System.Security;
+
 namespace DungeonCrawlerJam2026.GameComponents;
 
 
@@ -23,10 +25,9 @@ public abstract class TypeComponent
             Console.WriteLine("weakAgainst null");
             return flag;
         }
-
-        foreach (Types type in weakAgainst)
+        foreach (Types t in weakAgainst)
         {
-            if (typeComponent.type == type)
+            if (typeComponent.type == t)
             {
                 flag = true;
                 break;
@@ -43,9 +44,10 @@ public abstract class TypeComponent
             Console.WriteLine("strongAgainst null");
             return flag;
         }
-        foreach (Types type in strongAgainst)
+        Console.WriteLine("Strong#: "+strongAgainst.Count);
+        foreach (Types t in strongAgainst)
         {
-            if (typeComponent.type == type)
+            if (t == typeComponent.type)
             {
                 flag = true;
                 break;

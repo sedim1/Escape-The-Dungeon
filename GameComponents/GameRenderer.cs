@@ -8,20 +8,37 @@ public static class GameRenderer
 {
     private static Texture2D floorTex;
     private static Texture2D wallTex;
+    private static Texture2D exitTex;
 
+    private static Dictionary<EnemyTag, Texture2D> enemySprites;
 
     public static void StartRenderer()
     {
+        //Load map sprites
         string floorPath = "Resources/Sprites/Map/floor.png";
         string wallPath = "Resources/Sprites/Map/wall.png";
+        string exitTexPath = "Resources/Sprites/Map/wall2.png";
         floorTex = Raylib.LoadTexture(floorPath);
         wallTex = Raylib.LoadTexture(wallPath);
+        //Load enemysprites
+        enemySprites = new Dictionary<EnemyTag, Texture2D>();
+        enemySprites.Add(EnemyTag.BLUE,Raylib.LoadTexture("Resources/Sprites/Enemies/Blue.png"));
+        enemySprites.Add(EnemyTag.GREEN,Raylib.LoadTexture("Resources/Sprites/Enemies/Green.png"));
+        enemySprites.Add(EnemyTag.RED,Raylib.LoadTexture("Resources/Sprites/Enemies/Red.png"));
     }
 
     public static void EndRenderer()
     {
+        //Unload map sprites
         Raylib.UnloadTexture(floorTex);
         Raylib.UnloadTexture(wallTex);
+        Raylib.UnloadTexture(exitTex);
+        //Unload enemy sprites
+        foreach (var element in enemySprites)
+        {
+            Raylib.UnloadTexture(element.Value);
+        }
+        enemySprites.Clear();
     }
     
     private static void DrawCharactersOnMinipap(List<Character> characters)
@@ -48,18 +65,30 @@ public static class GameRenderer
             {
                 int posX = x * Global.GRIDSCALE;
                 int posY = y * Global.GRIDSCALE;
-                if (map.GetMap()[y,x] > 0)
+
+                Rectangle srcRect = new Rectangle(Raymath.Vector2Zero(),new Vector2(floorTex.Width,floorTex.Height));
+                Rectangle destRect = new Rectangle(new Vector2(posX,posY),new Vector2(Global.GRIDSCALE,Global.GRIDSCALE));
+                
+                if (map.GetMap()[y,x] == 1)
                 {
-                    Raylib.DrawRectangle(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.White);
-                    Raylib.DrawRectangleLines(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.Gray);
+                    //Raylib.DrawRectangle(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.White);
+                    //Raylib.DrawRectangleLines(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.Gray);
+                    Raylib.DrawTexturePro(wallTex,srcRect,destRect,Raymath.Vector2Zero(),0.0f,Color.White);
                 }
-                else
-                    Raylib.DrawRectangleLines(posX,posY,Global.GRIDSCALE,Global.GRIDSCALE,Color.Gray);
+                else if (map.GetMap()[y, x] == 0)
+                {
+                    Raylib.DrawTexturePro(floorTex,srcRect,destRect,Raymath.Vector2Zero(),0.0f,Color.White);
+                }
+                else if (map.GetMap()[y,x] == 2)
+                {
+                    Raylib.DrawTexturePro(exitTex,srcRect,destRect,Raymath.Vector2Zero(),0.0f,Color.White);
+                    //Raylib.DrawRectangleLines(posX, posY, Global.GRIDSCALE, Global.GRIDSCALE, Color.Gray);
+                }
             }
         }
         DrawCharactersOnMinipap(characters);
     }
-    public static void Render3DWorld(GameMap map,List<Character> characters)
+    public static void Render3DWorld(Camera3D camera,GameMap map,List<Character> characters)
     {
         Raylib.DrawGrid(100,Global.GRIDSCALE);
         for (int y = 0; y < map.GetHeight(); y++)
@@ -71,31 +100,32 @@ public static class GameRenderer
                 if (map.GetMap()[y, x] == 0)
                 {
                     //Raylib.DrawPlane(new Vector3(posX,0,posZ),new Vector2(Global.GRIDSCALE,Global.GRIDSCALE),Color.DarkGray);
-                    DrawTexturePlaneTile(wallTex,new Vector3(posX,0.0f,posZ),Vector3.UnitY,Color.White);
+                    DrawTexturePlaneTile(floorTex,new Vector3(posX,0.0f,posZ),Vector3.UnitY,Color.White);
                     posX += Global.GRIDSCALE/2;
                     posZ += Global.GRIDSCALE / 2;
-                    DrawCubeTexture(floorTex, new Vector3(posX,Global.GRIDSCALE + Global.GRIDSCALE/2,posZ),Global.GRIDSCALE,Global.GRIDSCALE,Global.GRIDSCALE,Color.White);
+                    DrawCubeTexture(wallTex, new Vector3(posX,Global.GRIDSCALE + Global.GRIDSCALE/2,posZ),Global.GRIDSCALE,Global.GRIDSCALE,Global.GRIDSCALE,Color.White);
                 }
                 else
                 {
                     posX += Global.GRIDSCALE/2;
                     posZ += Global.GRIDSCALE / 2;
-                    DrawCubeTexture(floorTex, new Vector3(posX,Global.GRIDSCALE/2,posZ),Global.GRIDSCALE,Global.GRIDSCALE,Global.GRIDSCALE,Color.White);
+                    DrawCubeTexture(wallTex, new Vector3(posX,Global.GRIDSCALE/2,posZ),Global.GRIDSCALE,Global.GRIDSCALE,Global.GRIDSCALE,Color.White);
                 }
             }
         }
         
-        RenderCharactersIn3DWorld(characters);
+        RenderCharactersIn3DWorld(camera,characters);
     }
 
-    private static void RenderCharactersIn3DWorld(List<Character> characters)
+    private static void RenderCharactersIn3DWorld(Camera3D camera,List<Character> characters)
     {
         foreach (Character character in characters)
         {
             if (character is Player)
                 continue;
-            Vector3 position = new Vector3(character.worldPosition.X,Global.GRIDSCALE/2,character.worldPosition.Y);
-            Raylib.DrawSphere(position,Global.GRIDSCALE/2/2,Color.Red);
+            Texture2D sprite = enemySprites[(character as Enemy).tag];
+            Vector3 position = new Vector3(character.worldPosition.X,Global.GRIDSCALE/2.0f,character.worldPosition.Y);
+            Raylib.DrawBillboard(camera,sprite,position,5.0f,Color.White);
         }
     }
 
@@ -249,7 +279,6 @@ public static class GameRenderer
         // Top Left Of The Texture and Quad
         Rlgl.Vertex3f(x - width / 2, y + height / 2, z - length / 2);
         Rlgl.End();
-        //rlPopMatrix();
         Rlgl.SetTexture(0);
     }
 }

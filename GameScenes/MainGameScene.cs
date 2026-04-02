@@ -33,7 +33,7 @@ public class MainGameScene : Scene
         mapViewport = Raylib.LoadRenderTexture(250, 250);
         camera2D = new Camera2D();
         camera2D.Offset = (new Vector2(mapViewport.Texture.Width/2,mapViewport.Texture.Height/2));
-        camera2D.Zoom = 4.0f;
+        camera2D.Zoom = 8.0f;
         camera2D.Rotation = 0.0f;
         
         
@@ -45,9 +45,9 @@ public class MainGameScene : Scene
         
         level.LoadMap("Resources/gamemap.json");
         characterManager.AddCharacter(new Player(new Vector2i(8,8),270));
-        characterManager.AddCharacter(new Enemy(new Vector2i(3,5)));
-        characterManager.AddCharacter(new Enemy(new Vector2i(1,1)));
-        characterManager.AddCharacter(new Enemy(new Vector2i(5,3)));
+        characterManager.AddCharacter(new RedEnemy(new Vector2i(3,5)));
+        characterManager.AddCharacter(new BlueEnemy(new Vector2i(1,1)));
+        characterManager.AddCharacter(new GreenEnemy(new Vector2i(5,3)));
     }
 
     public override void OnExit()
@@ -97,7 +97,7 @@ public class MainGameScene : Scene
         Raylib.BeginTextureMode(playerViewport);
         Raylib.ClearBackground(Color.Black);
         Raylib.BeginMode3D(camera3D);
-        GameRenderer.Render3DWorld(level,characterManager.GetCharacters());
+        GameRenderer.Render3DWorld(camera3D,level,characterManager.GetCharacters());
         Raylib.EndMode3D();
         Raylib.DrawText("Health: "+characterManager.GetPlayer().getHealthComponent().getHealth().ToString(),0,0,26,Color.Red);
         Raylib.EndTextureMode();

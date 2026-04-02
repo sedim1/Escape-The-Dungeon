@@ -13,6 +13,7 @@ public class Player : Character
         this.cellPosition = position;
         this.angle = angle;
         this.healthComponent = new HealthComponent(100, 100);
+        this.typeComponent = new DefaultTypeComponent();
         weapons =  new Inventory();
     }
     
