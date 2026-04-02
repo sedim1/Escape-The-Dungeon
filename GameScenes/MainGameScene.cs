@@ -29,7 +29,7 @@ public class MainGameScene : Scene
     public override void OnEnter()
     {
         Console.WriteLine("Main Scene OnEnter");
-        
+        GameRenderer.StartRenderer();
         mapViewport = Raylib.LoadRenderTexture(250, 250);
         camera2D = new Camera2D();
         camera2D.Offset = (new Vector2(mapViewport.Texture.Width/2,mapViewport.Texture.Height/2));
@@ -53,6 +53,7 @@ public class MainGameScene : Scene
     public override void OnExit()
     {
         Console.WriteLine("Main Scene OnExit");
+        GameRenderer.EndRenderer();
         Raylib.UnloadRenderTexture(playerViewport);
         Raylib.UnloadRenderTexture(mapViewport);
         characterManager.DeleteAllCharacters();
