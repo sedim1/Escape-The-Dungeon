@@ -44,7 +44,6 @@ public abstract class TypeComponent
             Console.WriteLine("strongAgainst null");
             return flag;
         }
-        Console.WriteLine("Strong#: "+strongAgainst.Count);
         foreach (Types t in strongAgainst)
         {
             if (t == typeComponent.type)
@@ -75,7 +74,7 @@ public class FireTypeComponent : TypeComponent
         strongAgainst = new List<Types>();
         strongAgainst.Add(Types.GRASS);
         weakAgainst = new List<Types>();
-        strongAgainst.Add(Types.WATER);
+        weakAgainst.Add(Types.WATER);
     }
 }
 
@@ -100,6 +99,6 @@ public class WaterTypeComponent : TypeComponent
         strongAgainst = new List<Types>();
         strongAgainst.Add(Types.FIRE);
         weakAgainst = new List<Types>();
-        weakAgainst.Add(Types.WATER);
+        weakAgainst.Add(Types.GRASS);
     }
 }

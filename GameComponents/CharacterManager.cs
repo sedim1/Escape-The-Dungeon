@@ -71,11 +71,9 @@ public class CharacterManager
              continue;
          orderList.Enqueue(character, playerPos.distanceFrom(character.cellPosition));
         }
-        Console.WriteLine("Dist from player");
         while (orderList.Count > 0)
         {
             Character character = orderList.Dequeue();
-            //Console.WriteLine(playerPos.distanceFrom(character.cellPosition));
             enemies.Add(character);
         }
 
