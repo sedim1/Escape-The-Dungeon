@@ -24,7 +24,7 @@ public static class InventoryRenderer
         weaponSprites.Add(WeaponTag.BOW,Raylib.LoadTexture(bowPath));
         colors = new Dictionary<Types, float[]>();
         colors.Add(Types.FIRE,new float[4]{119.0f/255.0f,27.0f/255.0f,9.0f/255.0f,1.0f});
-        colors.Add(Types.WATER,new float[4]{20.0f/255.0f,52.0f/255.0f,68.0f/255.0f,1.0f});
+        colors.Add(Types.WATER,new float[4]{20.0f/255.0f,52.0f/255.0f,88.0f/255.0f,1.0f});
         colors.Add(Types.GRASS,new float[4]{60.0f/255.0f,92.0f/255.0f,54.0f/255.0f,1.0f});
     }
 

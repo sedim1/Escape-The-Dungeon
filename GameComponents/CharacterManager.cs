@@ -1,4 +1,6 @@
+using System.Numerics;
 using DungeonCrawlerJam2026.Characters;
+using DungeonCrawlerJam2026.Utilties;
 
 namespace DungeonCrawlerJam2026.GameComponents;
 
@@ -56,5 +58,28 @@ public class CharacterManager
     public List<Character> GetCharacters()
     {
         return characters;
+    }
+    
+    public List<Character> GetEnemies()
+    {
+        List<Character> enemies = new List<Character>();
+        PriorityQueue<Character, float> orderList = new PriorityQueue<Character, float>();
+        Vector2i playerPos = GetPlayer().cellPosition;
+        foreach (Character character in characters)
+        {
+         if(character is Player)
+             continue;
+         orderList.Enqueue(character, playerPos.distanceFrom(character.cellPosition));
+        }
+        Console.WriteLine("Dist from player");
+        while (orderList.Count > 0)
+        {
+            Character character = orderList.Dequeue();
+            //Console.WriteLine(playerPos.distanceFrom(character.cellPosition));
+            enemies.Add(character);
+        }
+
+        enemies.Reverse();
+        return enemies;
     }
 }

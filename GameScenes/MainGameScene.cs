@@ -52,6 +52,8 @@ public class MainGameScene : Scene
         characterManager.AddCharacter(new RedEnemy(new Vector2i(3,5)));
         characterManager.AddCharacter(new BlueEnemy(new Vector2i(1,1)));
         characterManager.AddCharacter(new GreenEnemy(new Vector2i(5,3)));
+        characterManager.AddCharacter(new RedEnemy(new Vector2i(8,5)));
+        characterManager.AddCharacter(new GreenEnemy(new Vector2i(8,6)));
     }
 
     public override void OnExit()
@@ -106,7 +108,7 @@ public class MainGameScene : Scene
         Raylib.BeginTextureMode(playerViewport);
         Raylib.ClearBackground(Color.Black);
         Raylib.BeginMode3D(camera3D);
-        GameRenderer.Render3DWorld(camera3D,level,characterManager.GetCharacters());
+        GameRenderer.Render3DWorld(camera3D,level,characterManager.GetEnemies());
         Raylib.EndMode3D();
         Raylib.DrawText("Health: "+characterManager.GetPlayer().getHealthComponent().getHealth().ToString(),0,0,26,Color.Red);
         Raylib.EndTextureMode();
