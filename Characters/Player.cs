@@ -23,7 +23,9 @@ public class Player : Character
         worldPosition = cellPosition.CellToWorld();
         weapons.AddWeapon(new Sword(new FireTypeComponent()));
         weapons.AddWeapon(new Bow(new GrassTypeComponent()));
+        weapons.AddWeapon(new Whip(new WaterTypeComponent()));
     }
+    
     public override void Exit()
     {
         Console.WriteLine("Exit Player");

@@ -18,6 +18,8 @@ public class Inventory
     }
     public void AddWeapon(Weapon weapon)
     {
+        if (weapons == null)
+            weapons = new Weapon[3];
         for (int i = 0; i < weapons.Length; i++)
         {
             if (weapons[i] == null)
@@ -53,5 +55,9 @@ public class Inventory
     public Weapon getCurrentWeapon()
     {
         return weapons[index];
+    }
+    
+    public Weapon[] getWeapons(){
+        return weapons;
     }
 }
