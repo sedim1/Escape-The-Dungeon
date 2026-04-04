@@ -15,6 +15,7 @@ public class Player : Character
         this.healthComponent = new HealthComponent(100, 100);
         this.typeComponent = new DefaultTypeComponent();
         weapons =  new Inventory();
+        cooldownComponent = new CooldownComponent(5);
     }
     
     public override void Enter()
@@ -123,6 +124,9 @@ public class Player : Character
                 continue;
             if(!weapons.getCurrentWeapon().GetAttackComponent().isInRange(this,character))
                 continue;
+            Console.WriteLine("Attack succes from player");
+            Console.WriteLine(cooldownComponent.ToString());
+            cooldownComponent.Update();
             weapons.getCurrentWeapon().GetAttackComponent().Attack(character);
         }
     }

@@ -87,6 +87,14 @@ public static class PlayerController
             player.TriggerAttack(characterManager.GetCharacters());
             MovementSystem.ProcessEnemiesActions(map,player,characterManager.GetCharacters());
         }
+        //HealInput
+        if (Raylib.IsKeyPressed(KeyboardKey.K) && player.getCooldownComponent().hasFinsished())
+        {
+            player.getHealthComponent().increase(50);
+            player.getCooldownComponent().restart();
+        }
+        
+        
         //Inventory Input
         if (Raylib.IsKeyPressed(KeyboardKey.U))
         {
@@ -96,7 +104,6 @@ public static class PlayerController
         {
             player.weapons.changeWeapon(1);
         }
-
         if (Raylib.IsKeyPressed(KeyboardKey.O))
         {
             player.weapons.changeWeapon(2);

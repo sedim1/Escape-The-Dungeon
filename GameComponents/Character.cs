@@ -6,6 +6,7 @@ namespace DungeonCrawlerJam2026.GameComponents;
 
 public abstract class Character
 {
+    protected CooldownComponent cooldownComponent;
     protected HealthComponent healthComponent;
     protected TypeComponent typeComponent;
     public Vector2i cellPosition;
@@ -26,6 +27,11 @@ public abstract class Character
     public TypeComponent GetTypeComonent()
     {
         return typeComponent;
+    }
+
+    public CooldownComponent getCooldownComponent()
+    {
+        return cooldownComponent;
     }
     
     public void UpdateWorldPosition(float delta)
