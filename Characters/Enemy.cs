@@ -30,7 +30,7 @@ public class Enemy : Character
         Raylib.UnloadSound(normalHit);
     }
     public void ProcessAction(GameMap map,List<Character> characters,Player player)
-    {///AFK
+    {
         cooldownComponent.Update();
         if (!cooldownComponent.hasFinsished())
         {

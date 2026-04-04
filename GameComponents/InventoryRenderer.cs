@@ -74,10 +74,10 @@ public static class InventoryRenderer
     public static void RenderInventory(Inventory inventory,int x,int y)
     {
         int height = SLOTSCALE;
-        int width = SLOTSCALE * 3;
+        int width = SLOTSCALE;
         int i = 0;
         int shaderLoc = Raylib.GetShaderLocation(maskingShader, "colorReplacement");
-        string[] array = new string[3]{"U", "I", "O"};
+        string[] array = new string[1]{"J"};
         //DrawInventorBackground
         Raylib.DrawRectangle(x,y,width,height,Color.Black);
         Rectangle src = new Rectangle(0, 0, weaponSprites[WeaponTag.SWORD].Width,weaponSprites[WeaponTag.SWORD].Height);
@@ -96,7 +96,7 @@ public static class InventoryRenderer
                 Raylib.DrawRectangleLinesEx(destRect,3.0f,Color.White);
             else
                 Raylib.DrawRectangleLinesEx(destRect,3.0f,Color.Red);
-            Raylib.DrawText(array[i],x+(i*SLOTSCALE) + 5,y + 5,26,Color.Yellow);
+            Raylib.DrawText("J",x+(i*SLOTSCALE) + 5,y + 5,26,Color.Yellow);
             i += 1;
         }
     }

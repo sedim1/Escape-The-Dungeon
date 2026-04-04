@@ -8,7 +8,7 @@ public class Inventory
     public Inventory()
     {
         index = 0;
-        weapons = new Weapon[3] { null, null, null};
+        weapons = new Weapon[1] { null};
     }
 
     public void ClearInventory()

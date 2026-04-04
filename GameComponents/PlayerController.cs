@@ -7,15 +7,18 @@ namespace DungeonCrawlerJam2026.GameComponents;
 public static class PlayerController
 {
     private static Sound healSound;
+    private static Sound slashSound;
 
     public static void LoadControllerSouds()
     {
         healSound = Raylib.LoadSound("Resources/Audio/heal.wav");
+        slashSound = Raylib.LoadSound("Resources/Audio/slash.wav");
     }
 
     public static void UnloadControllerSounds()
     {
         Raylib.UnloadSound(healSound);
+        Raylib.UnloadSound(slashSound);
     }
     
     public static void ProcessInput(CharacterManager characterManager,GameMap map)
@@ -96,6 +99,7 @@ public static class PlayerController
         //Attack Input
         if (Raylib.IsKeyPressed(KeyboardKey.J))
         {
+            Raylib.PlaySound(slashSound);
             player.TriggerAttack(characterManager.GetCharacters());
             MovementSystem.ProcessEnemiesActions(map,player,characterManager.GetCharacters());
         }
@@ -107,19 +111,5 @@ public static class PlayerController
             player.getCooldownComponent().restart();
         }
         
-        
-        //Inventory Input
-        if (Raylib.IsKeyPressed(KeyboardKey.U))
-        {
-            player.weapons.changeWeapon(0);
-        }
-        if (Raylib.IsKeyPressed(KeyboardKey.I))
-        {
-            player.weapons.changeWeapon(1);
-        }
-        if (Raylib.IsKeyPressed(KeyboardKey.O))
-        {
-            player.weapons.changeWeapon(2);
-        }
     }
 }
