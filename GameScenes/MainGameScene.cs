@@ -61,6 +61,7 @@ public class MainGameScene : Scene
         characterManager.AddCharacter(new GreenEnemy(new Vector2i(5,3)));
         characterManager.AddCharacter(new RedEnemy(new Vector2i(8,5)));
         characterManager.AddCharacter(new GreenEnemy(new Vector2i(8,6)));
+        characterManager.LoadSounds();
         
         Raylib.PlayMusicStream(backgroundMusic);
     }
@@ -81,6 +82,7 @@ public class MainGameScene : Scene
         PlayerController.UnloadControllerSounds();
         
         characterManager.DeleteAllCharacters();
+        characterManager.UnloadSounds();
     }
 
     public override void Update(float deltaTime)

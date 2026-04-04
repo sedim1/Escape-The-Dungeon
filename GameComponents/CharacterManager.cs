@@ -1,12 +1,25 @@
 using System.Numerics;
 using DungeonCrawlerJam2026.Characters;
 using DungeonCrawlerJam2026.Utilties;
+using Raylib_cs;
 
 namespace DungeonCrawlerJam2026.GameComponents;
 
 public class CharacterManager
 {
     private List<Character> characters;
+    private Sound enemyDead;
+
+
+    public void LoadSounds()
+    {
+        enemyDead = Raylib.LoadSound("Resources/Audio/enemyDie.wav");
+    }
+
+    public void UnloadSounds()
+    {
+        Raylib.UnloadSound(enemyDead);
+    }
     
     public CharacterManager()
     {
@@ -40,6 +53,7 @@ public class CharacterManager
                 continue;
             if(!characters[i].getHealthComponent().isDepleted())
                 continue;
+            Raylib.PlaySound(enemyDead);
             characters[i].Exit();
             characters.RemoveAt(i);
         }
