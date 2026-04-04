@@ -16,6 +16,11 @@ public class Weapon
     {
         return attackComponent;
     }
+
+    public void ChangeAttackType(TypeComponent typeComponent)
+    {
+        attackComponent.setTypeComponent(typeComponent);
+    }
 }
 
 public class Sword : Weapon

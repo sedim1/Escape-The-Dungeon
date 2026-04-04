@@ -141,6 +141,10 @@ public class Player : Character
             else
                 Raylib.PlaySound(normalHit);
             weapons.getCurrentWeapon().GetAttackComponent().Attack(character);
+            if (character.getHealthComponent().isDepleted())
+            {
+                weapons.getCurrentWeapon().ChangeAttackType(character.GetTypeComonent());
+            }
             break;
         }
     }
