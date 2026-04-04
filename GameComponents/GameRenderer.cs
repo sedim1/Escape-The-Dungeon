@@ -99,6 +99,7 @@ public static class GameRenderer
         }
         DrawCharactersOnMinipap(characters);
     }
+    
 
     public static void Render3DWorld(Camera3D camera, GameMap map, List<Character> characters)
     {

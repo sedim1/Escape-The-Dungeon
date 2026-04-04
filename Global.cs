@@ -14,4 +14,16 @@ public static class Global
         Rectangle dest = new Rectangle(0, 0, 1024, 768);
         Raylib.DrawTexturePro(background,src,dest,Vector2.Zero,0.0f,Color.White);
     }
+
+    private static float shortAngleDist(float from, float to)
+    {
+        float turn = 360.0f;
+        float deltaAngle = (to - from) % turn;
+        return ((2 * deltaAngle) % turn) - deltaAngle;
+    }
+
+    public static float LerpAngle(float from, float to, float t)
+    {
+        return from + shortAngleDist(from,to) * t;
+    }
 }

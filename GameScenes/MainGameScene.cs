@@ -18,6 +18,7 @@ public class MainGameScene : Scene
     
     private RenderTexture2D playerViewport;
     private Camera3D  camera3D;
+    private float axis;
 
     public MainGameScene()
     {
@@ -45,14 +46,15 @@ public class MainGameScene : Scene
         camera3D.FovY = 45.0f;
         camera3D.Projection = CameraProjection.Perspective;
         camera3D.Up =  Vector3.UnitY;
-        
+        float angleStart = 270.0f;
         level.LoadMap("Resources/gamemap.json");
-        characterManager.AddCharacter(new Player(new Vector2i(8,8),270));
-        //characterManager.AddCharacter(new RedEnemy(new Vector2i(3,5)));
-        //characterManager.AddCharacter(new BlueEnemy(new Vector2i(1,1)));
-        //characterManager.AddCharacter(new GreenEnemy(new Vector2i(5,3)));
+        characterManager.AddCharacter(new Player(new Vector2i(8,8),angleStart));
+        axis = angleStart;
+        characterManager.AddCharacter(new RedEnemy(new Vector2i(3,5)));
+        characterManager.AddCharacter(new BlueEnemy(new Vector2i(1,1)));
+        characterManager.AddCharacter(new GreenEnemy(new Vector2i(5,3)));
         characterManager.AddCharacter(new RedEnemy(new Vector2i(8,5)));
-        //characterManager.AddCharacter(new GreenEnemy(new Vector2i(8,6)));
+        characterManager.AddCharacter(new GreenEnemy(new Vector2i(8,6)));
     }
 
     public override void OnExit()
@@ -73,6 +75,7 @@ public class MainGameScene : Scene
         characterManager.DeleteDefetaedEnemies();
         PlayerController.ProcessInput(characterManager,level);
         MovementSystem.UpdateCharactersPositions(characterManager.GetCharacters(), deltaTime);
+        axis = Global.LerpAngle(axis, characterManager.GetPlayer().angle, deltaTime * 10.0f);
     }
 
     public override void Draw()
@@ -105,7 +108,7 @@ public class MainGameScene : Scene
     {
         Vector2i playerDir = characterManager.GetPlayer().GetForwardDirection();
         Vector2 playerWorldPosition = characterManager.GetPlayer().worldPosition;
-        Vector3 forward = new Vector3(playerDir.X,-0,playerDir.Y);
+        Vector3 forward = Raymath.Vector3RotateByAxisAngle(new Vector3(1,0,0),new Vector3(0,-1,0),axis*Raylib.DEG2RAD);
         camera3D.Position = new Vector3(playerWorldPosition.X,Global.GRIDSCALE/2,playerWorldPosition.Y);
         camera3D.Target = camera3D.Position + forward;
         Raylib.BeginTextureMode(playerViewport);
