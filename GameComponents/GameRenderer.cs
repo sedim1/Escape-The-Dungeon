@@ -10,21 +10,32 @@ public static class GameRenderer
     private static Texture2D wallTex;
     private static Texture2D exitTex;
 
+    private static Model wallModel;
+    private static Model floorModel;
+    private static Model exitModel;
+    
+    
     private static Dictionary<EnemyTag, Texture2D> enemySprites;
+    private static List<Mesh> mapTiles;
 
     public static void StartRenderer()
     {
         //Load map sprites
-        string floorPath = "Resources/Sprites/Map/floor.png";
-        string wallPath = "Resources/Sprites/Map/wall.png";
-        string exitTexPath = "Resources/Sprites/Map/wall2.png";
-        floorTex = Raylib.LoadTexture(floorPath);
-        wallTex = Raylib.LoadTexture(wallPath);
+        string floorPath = "Resources/Sprites/Map/floor";
+        string wallPath = "Resources/Sprites/Map/wall1";
+        string exitTexPath = "Resources/Sprites/Map/wall2";
+        floorTex = Raylib.LoadTexture(floorPath+".png");
+        wallTex = Raylib.LoadTexture(wallPath+".png");
+        exitTex = Raylib.LoadTexture(exitTexPath+".png");
+        wallModel = Raylib.LoadModel(wallPath + ".glb");
+        floorModel = Raylib.LoadModel(floorPath + ".glb");
+        exitModel = Raylib.LoadModel(exitTexPath + ".glb");
         //Load enemysprites
         enemySprites = new Dictionary<EnemyTag, Texture2D>();
         enemySprites.Add(EnemyTag.BLUE,Raylib.LoadTexture("Resources/Sprites/Enemies/Blue.png"));
         enemySprites.Add(EnemyTag.GREEN,Raylib.LoadTexture("Resources/Sprites/Enemies/Green.png"));
         enemySprites.Add(EnemyTag.RED,Raylib.LoadTexture("Resources/Sprites/Enemies/Red.png"));
+        
     }
 
     public static void EndRenderer()
@@ -33,6 +44,9 @@ public static class GameRenderer
         Raylib.UnloadTexture(floorTex);
         Raylib.UnloadTexture(wallTex);
         Raylib.UnloadTexture(exitTex);
+        Raylib.UnloadModel(floorModel);
+        Raylib.UnloadModel(wallModel);
+        Raylib.UnloadModel(exitModel);
         //Unload enemy sprites
         foreach (var element in enemySprites)
         {
@@ -93,19 +107,16 @@ public static class GameRenderer
             for (int x = 0; x < map.GetWidth(); x++)
             {
                 float posX = x * Global.GRIDSCALE;
-                float posZ = y * Global.GRIDSCALE;
+                float posZ = y * Global.GRIDSCALE + Global.GRIDSCALE;
                 if (map.GetMap()[y, x] == 0)
                 {
-                    DrawTexturePlaneTile(floorTex,new Vector3(posX,0.0f,posZ),Vector3.UnitY,Color.White);
-                    posX += Global.GRIDSCALE/2;
-                    posZ += Global.GRIDSCALE / 2;
-                    DrawCubeTexture(wallTex, new Vector3(posX,Global.GRIDSCALE + Global.GRIDSCALE/2,posZ),Global.GRIDSCALE,Global.GRIDSCALE,Global.GRIDSCALE,Color.White);
+                    //DrawTexturePlaneTile(floorTex,new Vector3(posX,0.0f,posZ),Vector3.UnitY,Color.White);
+                    Raylib.DrawModel(floorModel,new Vector3(posX,0.0f,posZ),1.0f,Color.White);
+                    Raylib.DrawModel(wallModel,new Vector3(posX,Global.GRIDSCALE,posZ),1.0f,Color.White);
                 }
                 else
                 {
-                    posX += Global.GRIDSCALE/2;
-                    posZ += Global.GRIDSCALE / 2;
-                    DrawCubeTexture(wallTex, new Vector3(posX,Global.GRIDSCALE/2,posZ),Global.GRIDSCALE,Global.GRIDSCALE,Global.GRIDSCALE,Color.White);
+                    Raylib.DrawModel(wallModel,new Vector3(posX,0.0f,posZ),1.0f,Color.White);
                 }
             }
         }
