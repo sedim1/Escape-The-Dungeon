@@ -44,8 +44,9 @@ namespace DungeonCrawlerJam2026;
         private void GameLoop()
         {
             //Add scenes the game will run throughout its lifetime
+            SceneManager.AddScene(new GameOver(),"gameOver");
             SceneManager.AddScene(new MainGameScene(),"main");
-            SceneManager.TriggerChange("main");
+            SceneManager.TriggerChange("gameOver");
             //Start Game loop
             while (!Raylib.WindowShouldClose())
             {

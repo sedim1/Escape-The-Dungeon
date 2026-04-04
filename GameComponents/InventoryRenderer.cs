@@ -7,11 +7,11 @@ public static class InventoryRenderer
 {
     
     private static int SLOTSCALE = 84;
-    private static Texture2D emptyHeart;
-    private static Texture2D fullHeart;
-    private static Dictionary<WeaponTag, Texture2D> weaponSprites;
+    private static Texture2D emptyHeart = new Texture2D();
+    private static Texture2D fullHeart = new Texture2D();
+    private static Dictionary<WeaponTag, Texture2D> weaponSprites = new Dictionary<WeaponTag, Texture2D>();
     private static Dictionary<Types, float[]> colors;
-    private static Shader maskingShader;
+    private static Shader maskingShader = new Shader();
     
     public static void Init()
     {
@@ -37,14 +37,20 @@ public static class InventoryRenderer
 
     public static void End()
     {
+        Console.WriteLine("Ending renderer");
         Raylib.UnloadShader(maskingShader);
-        foreach (var element in weaponSprites)
+        Console.WriteLine("Unloading icons");
+        if (weaponSprites.Count > 0)
         {
-            Raylib.UnloadTexture(element.Value);
+            foreach (var element in weaponSprites)
+            {
+                Raylib.UnloadTexture(element.Value);
+            }
+
+            weaponSprites.Clear();
         }
         Raylib.UnloadTexture(emptyHeart);
         Raylib.UnloadTexture(fullHeart);
-        weaponSprites.Clear();
     }
 
     public static void renderHealCoolDown(CooldownComponent cooldownComponent,int x, int y)

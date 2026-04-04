@@ -1,0 +1,46 @@
+using DungeonCrawlerJam2026.Utilties.Scenes;
+using Raylib_cs;
+
+namespace DungeonCrawlerJam2026.GameScenes;
+
+public class GameOver : Scene
+{
+    private Sound gameOverSound;
+    public GameOver()
+    {}
+
+    public override void OnEnter()
+    {
+     Console.WriteLine("Entered GameOver Scene");   
+     gameOverSound = Raylib.LoadSound("Resources/Audio/GameOver.wav");
+     Raylib.PlaySound(gameOverSound);
+    }
+
+    public override void OnExit()
+    {
+        Console.WriteLine("Exiting GameOver Scene");   
+        Raylib.UnloadSound(gameOverSound);
+    }
+
+    public override void Update(float deltaTime)
+    {
+        if (Raylib.IsKeyPressed(KeyboardKey.Enter))
+        {
+            
+        }
+
+        if (Raylib.IsKeyPressed(KeyboardKey.R))
+        {
+            SceneManager.TriggerChange("main");
+        }
+    }
+
+    public override void Draw()
+    {
+        Global.DrawBackground();
+        Raylib.DrawText("GAME OVER",183,203,120,Color.White);
+        Raylib.DrawText("GAME OVER",180,200,120,Color.Red);
+        Raylib.DrawText("ENTER: GameTitle",180,400,60,Color.Yellow);
+        Raylib.DrawText("R: Restart",180,464,60,Color.Yellow);
+    }
+}

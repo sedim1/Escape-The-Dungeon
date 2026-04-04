@@ -6,15 +6,15 @@ namespace DungeonCrawlerJam2026.GameComponents;
 
 public static class GameRenderer
 {
-    private static Texture2D floorTex;
-    private static Texture2D wallTex;
-    private static Texture2D exitTex;
+    private static Texture2D floorTex = new Texture2D();
+    private static Texture2D wallTex = new Texture2D();
+    private static Texture2D exitTex = new Texture2D();
 
-    private static Model wallModel;
-    private static Model floorModel;
-    private static Model exitModel;
+    private static Model wallModel = new Model();
+    private static Model floorModel = new Model();
+    private static Model exitModel = new Model();
 
-    private static Dictionary<EnemyTag, Texture2D> enemySprites;
+    private static Dictionary<EnemyTag, Texture2D> enemySprites = new Dictionary<EnemyTag, Texture2D>();
     private static List<Mesh> mapTiles;
 
 
@@ -48,11 +48,15 @@ public static class GameRenderer
         Raylib.UnloadModel(wallModel);
         Raylib.UnloadModel(exitModel);
         //Unload enemy sprites
-        foreach (var element in enemySprites)
+        if (enemySprites.Count > 0)
         {
-            Raylib.UnloadTexture(element.Value);
+            foreach (var element in enemySprites)
+            {
+                Raylib.UnloadTexture(element.Value);
+            }
+
+            enemySprites.Clear();
         }
-        enemySprites.Clear();
     }
     
     private static void DrawCharactersOnMinipap(List<Character> characters)
