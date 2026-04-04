@@ -11,6 +11,16 @@ public class CooldownComponent
         current = 0;
     }
 
+    public int getWaitTime()
+    {
+        return waitTime;
+    }
+
+    public int getCurrent()
+    {
+        return current;
+    }
+
     public void Update()
     {
         current += 1;

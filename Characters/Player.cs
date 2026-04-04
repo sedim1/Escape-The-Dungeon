@@ -15,7 +15,7 @@ public class Player : Character
         this.healthComponent = new HealthComponent(100, 100);
         this.typeComponent = new DefaultTypeComponent();
         weapons =  new Inventory();
-        cooldownComponent = new CooldownComponent(5);
+        cooldownComponent = new CooldownComponent(6);
     }
     
     public override void Enter()
