@@ -147,4 +147,11 @@ public static class GameRenderer
             AStarSeach.DebugPath(map,manager.GetCharacters(),character,player);
         }
     }
+
+    public static void RenderPlayerHealthBar(Player player, int x, int y, int w, int h)
+    {
+        int green_w = (player.getHealthComponent().getHealth() * w)/player.getHealthComponent().getMaxHealth();
+        Raylib.DrawRectangle(x,y,w,h,Color.Red);
+        Raylib.DrawRectangle(x,y,green_w,h,Color.Green);
+    }
 }

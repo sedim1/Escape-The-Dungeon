@@ -81,6 +81,7 @@ public class MainGameScene : Scene
         DrawUIWorld3D();
         DrawUIMap();
         InventoryRenderer.RenderInventory(characterManager.GetPlayer().weapons,750,280);
+        GameRenderer.RenderPlayerHealthBar(characterManager.GetPlayer(),750,380,250,50);
     }
     
 
