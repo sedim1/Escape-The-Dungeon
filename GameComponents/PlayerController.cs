@@ -6,6 +6,18 @@ namespace DungeonCrawlerJam2026.GameComponents;
 
 public static class PlayerController
 {
+    private static Sound healSound;
+
+    public static void LoadControllerSouds()
+    {
+        healSound = Raylib.LoadSound("Resources/Audio/heal.wav");
+    }
+
+    public static void UnloadControllerSounds()
+    {
+        Raylib.UnloadSound(healSound);
+    }
+    
     public static void ProcessInput(CharacterManager characterManager,GameMap map)
     {
         Player player = characterManager.GetPlayer();
@@ -90,6 +102,7 @@ public static class PlayerController
         //HealInput
         if (Raylib.IsKeyPressed(KeyboardKey.K) && player.getCooldownComponent().hasFinsished())
         {
+            Raylib.PlaySound(healSound);
             player.getHealthComponent().increase(50);
             player.getCooldownComponent().restart();
         }

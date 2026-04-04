@@ -33,7 +33,9 @@ public class MainGameScene : Scene
         Console.WriteLine("Main Scene OnEnter");
 
         backgroundMusic = Raylib.LoadMusicStream("Resources/Audio/MainGameBackgroundMusic.mp3");
-        Raylib.SetMusicVolume(backgroundMusic,0.8f);
+        Raylib.SetMusicVolume(backgroundMusic,1.0f);
+        
+        PlayerController.LoadControllerSouds();
         
         GameRenderer.StartRenderer();
         InventoryRenderer.Init();
@@ -75,6 +77,8 @@ public class MainGameScene : Scene
         
         Raylib.StopMusicStream(backgroundMusic);
         Raylib.UnloadMusicStream(backgroundMusic);
+        
+        PlayerController.UnloadControllerSounds();
         
         characterManager.DeleteAllCharacters();
     }
