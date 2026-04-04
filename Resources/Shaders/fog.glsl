@@ -1,16 +1,16 @@
 #version 330
 
 // Input vertex attributes (from vertex shader)
-in vec2 fragTexCoord;
-in vec4 fragColor;
-in vec3 fragPosition;
+out vec3 fragPosition;
+out vec2 fragTexCoord;
+out vec4 fragColor;
+out vec3 fragNormal;
 
 // Input uniform values
 uniform sampler2D texture0;
-uniform vec4 colDiffuse;
 
 // Output fragment color
-out vec4 finalColor;
+out vec4 fColor;
 
 // NOTE: Add your custom variables here
 uniform vec4 ambient;
@@ -24,7 +24,10 @@ void main()
     vec4 texelColor = texture(texture0, fragTexCoord);
 
     // NOTE: Implement here your fragment shader code
-    float dist = length;
+    float dist = length(viewPos-fragPosition);
+    float fogFactor = 1.0/exp((dist*fogDensity)*(dist*fogDensity));
+    fogFactor = clamp(fogFactor,0.0,1.0);
   
-    finalColor = texelColor*colDiffuse*fragColor;
+    vec4 finalColor = texelColor * ambient;
+    fcolor = mix(fogColor,finalColor,fogFactor);
 }
