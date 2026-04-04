@@ -77,6 +77,7 @@ public class MainGameScene : Scene
 
     public override void Draw()
     {
+        Global.DrawBackground();
         DrawUIWorld3D();
         DrawUIMap();
         InventoryRenderer.RenderInventory(characterManager.GetPlayer().weapons,750,280);
@@ -97,6 +98,7 @@ public class MainGameScene : Scene
         Vector2 screenPos = new Vector2(750, 10);
         Vector2 size = new Vector2(mapViewport.Texture.Width,-mapViewport.Texture.Height);
         Raylib.DrawTextureRec(mapViewport.Texture,new Rectangle(Raymath.Vector2Zero(),size),screenPos,Color.White);
+        Raylib.DrawRectangleLinesEx(new Rectangle(750,10,mapViewport.Texture.Width,mapViewport.Texture.Height),2.0f,Color.White);
     }
 
     private void DrawUIWorld3D()
@@ -115,5 +117,6 @@ public class MainGameScene : Scene
         Vector2 screenPos = new Vector2(10, 10);
         Vector2 size = new Vector2(playerViewport.Texture.Width,-playerViewport.Texture.Height);
         Raylib.DrawTextureRec(playerViewport.Texture,new Rectangle(Raymath.Vector2Zero(),size),screenPos,Color.White);
+        Raylib.DrawRectangleLinesEx(new Rectangle(10,10,playerViewport.Texture.Width,playerViewport.Texture.Height),2.0f,Color.White);
     }
 }

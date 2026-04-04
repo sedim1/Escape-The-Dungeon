@@ -28,11 +28,13 @@ namespace DungeonCrawlerJam2026;
         private void Init()
         {
             Raylib.InitWindow(sw, sh, title);
+            Global.background = Raylib.LoadTexture("Resources/Sprites/background.png");
             Raylib.SetTargetFPS(60);
         }
 
         private void End()
         {
+            Raylib.UnloadTexture(Global.background);
             SceneManager.ClearAllScenes();
             Raylib.CloseWindow();
         }

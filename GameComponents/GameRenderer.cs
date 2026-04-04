@@ -153,5 +153,6 @@ public static class GameRenderer
         int green_w = (player.getHealthComponent().getHealth() * w)/player.getHealthComponent().getMaxHealth();
         Raylib.DrawRectangle(x,y,w,h,Color.Red);
         Raylib.DrawRectangle(x,y,green_w,h,Color.Green);
+        Raylib.DrawRectangleLinesEx(new Rectangle(x,y,w,h),3.0f,Color.White);
     }
 }
