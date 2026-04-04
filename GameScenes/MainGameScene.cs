@@ -33,7 +33,7 @@ public class MainGameScene : Scene
         Console.WriteLine("Main Scene OnEnter");
 
         backgroundMusic = Raylib.LoadMusicStream("Resources/Audio/MainGameBackgroundMusic.mp3");
-        Raylib.SetMusicVolume(backgroundMusic,1.0f);
+        Raylib.SetMusicVolume(backgroundMusic,0.5f);
         
         PlayerController.LoadControllerSouds();
         
@@ -88,6 +88,7 @@ public class MainGameScene : Scene
     public override void Update(float deltaTime)
     {
         Raylib.UpdateMusicStream(backgroundMusic);
+        characterManager.checkPlayerDead();
         if (!Raylib.IsMusicStreamPlaying(backgroundMusic))
         {
             Raylib.StopMusicStream(backgroundMusic);

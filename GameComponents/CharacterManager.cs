@@ -9,16 +9,19 @@ public class CharacterManager
 {
     private List<Character> characters;
     private Sound enemyDead;
+    private Sound lowHealth;
 
 
     public void LoadSounds()
     {
         enemyDead = Raylib.LoadSound("Resources/Audio/enemyDie.wav");
+        lowHealth = Raylib.LoadSound("Resources/Audio/lowHealth.wav");
     }
 
     public void UnloadSounds()
     {
         Raylib.UnloadSound(enemyDead);
+        Raylib.UnloadSound(lowHealth);
     }
     
     public CharacterManager()
@@ -72,6 +75,17 @@ public class CharacterManager
     public List<Character> GetCharacters()
     {
         return characters;
+    }
+
+    public void checkPlayerDead()
+    {
+        Player p = GetPlayer();
+        if (p == null)
+            return;
+        if (p.getHealthComponent().getHealth() <= 20 && !Raylib.IsSoundPlaying(lowHealth))
+        {
+            Raylib.PlaySound(lowHealth);
+        }
     }
     
     public List<Character> GetEnemies()

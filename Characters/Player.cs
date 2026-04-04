@@ -26,8 +26,6 @@ public class Player : Character
         Console.WriteLine("Entering Player");
         worldPosition = cellPosition.CellToWorld();
         weapons.AddWeapon(new Sword(new DefaultTypeComponent()));
-        weapons.AddWeapon(new Bow(new GrassTypeComponent()));
-        weapons.AddWeapon(new Whip(new WaterTypeComponent()));
         normalHit = Raylib.LoadSound("Resources/Audio/normalHit.wav");
         superEffectiveSound = Raylib.LoadSound("Resources/Audio/superEffectiveHit.wav");
         nonEffectiveSound = Raylib.LoadSound("Resources/Audio/notEffectiveHit.wav");
