@@ -135,4 +135,21 @@ public class Player : Character
     {
         return "Character player";
     }
+
+    public Character getEnemyInFront(List<Character> characters)
+    {
+        Character enemy = null;
+        Vector2i forwardPosition = cellPosition.Add(GetForwardDirection());
+        foreach (Character character in characters)
+        {
+            if (character is Player)
+                continue;
+            if (character.cellPosition.Equals(forwardPosition))
+            {
+                enemy = character;
+                break;
+            }
+        }
+        return enemy;
+    }
 }

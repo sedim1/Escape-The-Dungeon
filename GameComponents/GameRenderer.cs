@@ -149,9 +149,9 @@ public static class GameRenderer
         }
     }
 
-    public static void RenderPlayerHealthBar(Player player, int x, int y, int w, int h)
+    public static void RenderHealthBar(Character character, int x, int y, int w, int h)
     {
-        int green_w = (player.getHealthComponent().getHealth() * w)/player.getHealthComponent().getMaxHealth();
+        int green_w = (character.getHealthComponent().getHealth() * w)/character.getHealthComponent().getMaxHealth();
         Raylib.DrawRectangle(x,y,w,h,Color.Red);
         Raylib.DrawRectangle(x,y,green_w,h,Color.Green);
         Raylib.DrawRectangleLinesEx(new Rectangle(x,y,w,h),3.0f,Color.White);

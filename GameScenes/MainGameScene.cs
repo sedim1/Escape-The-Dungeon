@@ -83,9 +83,15 @@ public class MainGameScene : Scene
         Global.DrawBackground();
         DrawUIWorld3D();
         DrawUIMap();
-        InventoryRenderer.RenderInventory(characterManager.GetPlayer().weapons,750,280);
-        GameRenderer.RenderPlayerHealthBar(characterManager.GetPlayer(),750,380,250,50);
+        InventoryRenderer.RenderInventory(characterManager.GetPlayer().weapons,750,270);
+        Raylib.DrawText("Health:",750,380-26,26,Color.Yellow);
+        GameRenderer.RenderHealthBar(characterManager.GetPlayer(),750,380,250,50);
         InventoryRenderer.renderHealCoolDown(characterManager.GetPlayer().getCooldownComponent(),750,450);
+        if( characterManager.GetPlayer().getEnemyInFront(characterManager.GetCharacters()) != null)
+        {
+            Raylib.DrawText("Enemy Health:",750,620-26,26,Color.Yellow);
+            GameRenderer.RenderHealthBar(characterManager.GetPlayer().getEnemyInFront(characterManager.GetCharacters()) as Character, 750,620,250,50);
+        }
     }
     
 
