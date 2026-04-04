@@ -5,7 +5,8 @@ namespace DungeonCrawlerJam2026.GameScenes;
 
 public class GameOver : Scene
 {
-    private Sound gameOverSound;
+    private Sound gameOverSound = new Sound();
+    private bool loaded = false;
     public GameOver()
     {}
 
@@ -14,12 +15,19 @@ public class GameOver : Scene
      Console.WriteLine("Entered GameOver Scene");   
      gameOverSound = Raylib.LoadSound("Resources/Audio/GameOver.wav");
      Raylib.PlaySound(gameOverSound);
+     loaded = true;
     }
 
     public override void OnExit()
     {
-        Console.WriteLine("Exiting GameOver Scene");   
-        Raylib.UnloadSound(gameOverSound);
+        if (loaded)
+        {
+            Console.WriteLine("Exiting GameOver Scene");
+            Raylib.UnloadSound(gameOverSound);
+            Console.WriteLine("GameOver finished unloading resorces");
+        }
+
+        loaded = false;
     }
 
     public override void Update(float deltaTime)

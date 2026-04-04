@@ -10,17 +10,17 @@ namespace DungeonCrawlerJam2026.GameScenes;
 public class MainGameScene : Scene
 {
 
-    private GameMap level;
+    private GameMap level = new GameMap();
     private CharacterManager characterManager;
 
-    private RenderTexture2D mapViewport;
-    private Camera2D camera2D;
+    private RenderTexture2D mapViewport = new RenderTexture2D();
+    private Camera2D camera2D = new Camera2D();
     
-    private RenderTexture2D playerViewport;
-    private Camera3D  camera3D;
+    private RenderTexture2D playerViewport = new RenderTexture2D();
+    private Camera3D  camera3D = new Camera3D();
     private float axis;
 
-    private Music backgroundMusic;
+    private Music backgroundMusic = new Music();
 
     public MainGameScene()
     {
@@ -83,6 +83,7 @@ public class MainGameScene : Scene
         
         characterManager.DeleteAllCharacters();
         characterManager.UnloadSounds();
+        Console.WriteLine("Main Scene Finished unloaded resources");
     }
 
     public override void Update(float deltaTime)

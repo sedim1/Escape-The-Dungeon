@@ -35,8 +35,8 @@ namespace DungeonCrawlerJam2026;
 
         private void End()
         {
-            Raylib.UnloadTexture(Global.background);
             SceneManager.ClearAllScenes();
+            Raylib.UnloadTexture(Global.background);
             Raylib.CloseAudioDevice();
             Raylib.CloseWindow();
         }
@@ -44,8 +44,8 @@ namespace DungeonCrawlerJam2026;
         private void GameLoop()
         {
             //Add scenes the game will run throughout its lifetime
-            SceneManager.AddScene(new GameOver(),"gameOver");
             SceneManager.AddScene(new MainGameScene(),"main");
+            SceneManager.AddScene(new GameOver(),"gameOver");
             SceneManager.TriggerChange("gameOver");
             //Start Game loop
             while (!Raylib.WindowShouldClose())
