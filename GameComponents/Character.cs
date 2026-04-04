@@ -11,6 +11,8 @@ public abstract class Character
     protected TypeComponent typeComponent;
     public Vector2i cellPosition;
     public Vector2 worldPosition;
+
+    protected Sound normalHit;
     
     public float angle;
     public bool isMoving = false;

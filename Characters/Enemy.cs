@@ -1,5 +1,6 @@
 using DungeonCrawlerJam2026.GameComponents;
 using DungeonCrawlerJam2026.Utilties;
+using Raylib_cs;
 
 namespace DungeonCrawlerJam2026.Characters;
 
@@ -21,10 +22,12 @@ public class Enemy : Character
     {
         Console.WriteLine("Entering Enemy");
         this.worldPosition = cellPosition.CellToWorld();
+        normalHit = Raylib.LoadSound("Resources/Audio/playerHit.wav");
     }
     public override void Exit()
     {
         Console.WriteLine("Exiting enemy");
+        Raylib.UnloadSound(normalHit);
     }
     public void ProcessAction(GameMap map,List<Character> characters,Player player)
     {///AFK
@@ -38,6 +41,7 @@ public class Enemy : Character
         //Attack if possible
         if (flagAttack)
         {
+            Raylib.PlaySound(normalHit);
             attackComponent.Attack(player);
         }
         else //Follo player if alerted

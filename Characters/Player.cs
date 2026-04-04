@@ -8,6 +8,9 @@ namespace DungeonCrawlerJam2026.Characters;
 public class Player : Character
 {
     public Inventory weapons;
+    private Sound superEffectiveSound;
+    private Sound nonEffectiveSound;
+    
     public Player(Vector2i position, float angle)
     {
         this.cellPosition = position;
@@ -22,15 +25,21 @@ public class Player : Character
     {
         Console.WriteLine("Entering Player");
         worldPosition = cellPosition.CellToWorld();
-        weapons.AddWeapon(new Sword(new FireTypeComponent()));
+        weapons.AddWeapon(new Sword(new DefaultTypeComponent()));
         weapons.AddWeapon(new Bow(new GrassTypeComponent()));
         weapons.AddWeapon(new Whip(new WaterTypeComponent()));
+        normalHit = Raylib.LoadSound("Resources/Audio/normalHit.wav");
+        superEffectiveSound = Raylib.LoadSound("Resources/Audio/superEffectiveHit.wav");
+        nonEffectiveSound = Raylib.LoadSound("Resources/Audio/notEffectiveHit.wav");
     }
     
     public override void Exit()
     {
         Console.WriteLine("Exit Player");
         weapons.ClearInventory();
+        Raylib.UnloadSound(superEffectiveSound);
+        Raylib.UnloadSound(nonEffectiveSound);
+        Raylib.UnloadSound(normalHit);
     }  
     public Vector2i GetForwardDirection()
     {
@@ -127,7 +136,14 @@ public class Player : Character
             Console.WriteLine("Attack succes from player");
             Console.WriteLine(cooldownComponent.ToString());
             cooldownComponent.Update();
+            if(weapons.getCurrentWeapon().GetAttackComponent().typeComponent.isStrongAgainst(character.GetTypeComonent()))
+                Raylib.PlaySound(superEffectiveSound);
+            else if(weapons.getCurrentWeapon().GetAttackComponent().typeComponent.isWeakAgainst(character.GetTypeComonent())) 
+                Raylib.PlaySound(nonEffectiveSound);
+            else
+                Raylib.PlaySound(normalHit);
             weapons.getCurrentWeapon().GetAttackComponent().Attack(character);
+            break;
         }
     }
 
