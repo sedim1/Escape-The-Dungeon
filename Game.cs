@@ -28,6 +28,7 @@ namespace DungeonCrawlerJam2026;
         private void Init()
         {
             Raylib.InitWindow(sw, sh, title);
+            Raylib.InitAudioDevice();
             Global.background = Raylib.LoadTexture("Resources/Sprites/background.png");
             Raylib.SetTargetFPS(60);
         }
@@ -36,6 +37,7 @@ namespace DungeonCrawlerJam2026;
         {
             Raylib.UnloadTexture(Global.background);
             SceneManager.ClearAllScenes();
+            Raylib.CloseAudioDevice();
             Raylib.CloseWindow();
         }
 

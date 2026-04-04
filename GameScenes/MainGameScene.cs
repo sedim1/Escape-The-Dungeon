@@ -20,6 +20,8 @@ public class MainGameScene : Scene
     private Camera3D  camera3D;
     private float axis;
 
+    private Music backgroundMusic;
+
     public MainGameScene()
     {
         level = new GameMap();
@@ -29,7 +31,9 @@ public class MainGameScene : Scene
     public override void OnEnter()
     {
         Console.WriteLine("Main Scene OnEnter");
-        
+
+        backgroundMusic = Raylib.LoadMusicStream("Resources/Audio/MainGameBackgroundMusic.mp3");
+        Raylib.SetMusicVolume(backgroundMusic,0.8f);
         
         GameRenderer.StartRenderer();
         InventoryRenderer.Init();
@@ -55,6 +59,8 @@ public class MainGameScene : Scene
         characterManager.AddCharacter(new GreenEnemy(new Vector2i(5,3)));
         characterManager.AddCharacter(new RedEnemy(new Vector2i(8,5)));
         characterManager.AddCharacter(new GreenEnemy(new Vector2i(8,6)));
+        
+        Raylib.PlayMusicStream(backgroundMusic);
     }
 
     public override void OnExit()
@@ -67,11 +73,21 @@ public class MainGameScene : Scene
         Raylib.UnloadRenderTexture(playerViewport);
         Raylib.UnloadRenderTexture(mapViewport);
         
+        Raylib.StopMusicStream(backgroundMusic);
+        Raylib.UnloadMusicStream(backgroundMusic);
+        
         characterManager.DeleteAllCharacters();
     }
 
     public override void Update(float deltaTime)
     {
+        Raylib.UpdateMusicStream(backgroundMusic);
+        if (!Raylib.IsMusicStreamPlaying(backgroundMusic))
+        {
+            Raylib.StopMusicStream(backgroundMusic);
+            Raylib.PlayMusicStream(backgroundMusic);
+        }
+
         characterManager.DeleteDefetaedEnemies();
         PlayerController.ProcessInput(characterManager,level);
         MovementSystem.UpdateCharactersPositions(characterManager.GetCharacters(), deltaTime);

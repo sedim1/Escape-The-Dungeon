@@ -27,7 +27,7 @@ public class Enemy : Character
         Console.WriteLine("Exiting enemy");
     }
     public void ProcessAction(GameMap map,List<Character> characters,Player player)
-    {
+    {///AFK
         cooldownComponent.Update();
         if (!cooldownComponent.hasFinsished())
         {
