@@ -67,7 +67,7 @@ public static class GameRenderer
             else if (character is Player)
             {
                 Raylib.DrawCircleV(character.worldPosition,Global.GRIDSCALE/2/2,Color.Blue);
-                Raylib.DrawLineEx(character.worldPosition,character.worldPosition+Raymath.Vector2Scale((character as Player).GetDirection(),Global.GRIDSCALE/2),2,Color.Blue);
+                Raylib.DrawLineEx(character.worldPosition,character.worldPosition+Raymath.Vector2Scale((character as Player).GetDirection(),Global.GRIDSCALE/2),1,Color.Blue);
             }
         }
     }
@@ -102,7 +102,7 @@ public static class GameRenderer
     }
     
 
-    public static void Render3DWorld(Camera3D camera, GameMap map, List<Character> characters)
+    public static void Render3DWorld(Camera3D camera, GameMap map, List<Character> characters,Vector2i playerPos)
     {
         for (int y = 0; y < map.GetHeight(); y++)
         {
@@ -110,34 +110,38 @@ public static class GameRenderer
             {
                 float posX = x * Global.GRIDSCALE;
                 float posZ = y * Global.GRIDSCALE + Global.GRIDSCALE;
+                Vector2i tilePos = new Vector2i(x,y);
+                Color c = Global.calculateFogColor(playerPos.distanceFrom(tilePos));
                 if (map.GetMap()[y, x] == 0)
                 {
                     //DrawTexturePlaneTile(floorTex,new Vector3(posX,0.0f,posZ),Vector3.UnitY,Color.White);
-                    Raylib.DrawModel(floorModel,new Vector3(posX,0.0f,posZ),1.0f,Color.White);
-                    Raylib.DrawModel(wallModel,new Vector3(posX,Global.GRIDSCALE,posZ),1.0f,Color.White);
+                    Raylib.DrawModel(floorModel,new Vector3(posX,0.0f,posZ),1.0f,c);
+                    Raylib.DrawModel(wallModel,new Vector3(posX,Global.GRIDSCALE,posZ),1.0f,c);
                 }
                 else if (map.GetMap()[y, x] == 2)
                 {
-                    Raylib.DrawModel(exitModel,new Vector3(posX,0.0f,posZ),1.0f,Color.White);
+                    Raylib.DrawModel(exitModel,new Vector3(posX,0.0f,posZ),1.0f,c);
                 }
                 else
                 {
-                    Raylib.DrawModel(wallModel,new Vector3(posX,0.0f,posZ),1.0f,Color.White);
+                    Raylib.DrawModel(wallModel,new Vector3(posX,0.0f,posZ),1.0f,c);
                 }
             }
         }
-        RenderCharactersIn3DWorld(camera,characters);
+        RenderCharactersIn3DWorld(camera,characters,playerPos);
     }
 
-    private static void RenderCharactersIn3DWorld(Camera3D camera,List<Character> characters)
+    private static void RenderCharactersIn3DWorld(Camera3D camera,List<Character> characters,Vector2i playerPos)
     {
         foreach (Character character in characters)
         {
             if (character is Player)
                 continue;
             Texture2D sprite = enemySprites[(character as Enemy).tag];
+            Vector2i enemyTilePos = character.cellPosition;
+            Color c = Global.calculateFogColor(playerPos.distanceFrom(enemyTilePos));
             Vector3 position = new Vector3(character.worldPosition.X,Global.GRIDSCALE/2.0f,character.worldPosition.Y);
-            Raylib.DrawBillboard(camera,sprite,position,5.0f,Color.White);
+            Raylib.DrawBillboard(camera,sprite,position,5.0f,c);
         }
     }
     

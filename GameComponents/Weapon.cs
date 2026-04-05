@@ -28,7 +28,7 @@ public class Sword : Weapon
     public Sword(TypeComponent typeComponent)
     {
         tag = WeaponTag.SWORD;
-        attackComponent = new AttackComponent(typeComponent, 10, 1);
+        attackComponent = new AttackComponent(typeComponent, 20, 1);
     }
 }
 

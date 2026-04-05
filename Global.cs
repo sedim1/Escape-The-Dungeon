@@ -26,4 +26,13 @@ public static class Global
     {
         return from + shortAngleDist(from,to) * t;
     }
+
+    public static Color calculateFogColor(float dist)
+    {
+        float maxDist =4.0f; 
+        float intensity = 1.0f - Math.Clamp(dist / maxDist, 0.0f, 1.0f);
+        byte brightness = (byte)(intensity * 255);
+        Color c = new Color(brightness, brightness, brightness, (byte)255);
+        return c;
+    }
 }

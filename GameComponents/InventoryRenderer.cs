@@ -55,7 +55,7 @@ public static class InventoryRenderer
 
     public static void renderHealCoolDown(CooldownComponent cooldownComponent,int x, int y)
     {
-        Raylib.DrawRectangle(x,y,SLOTSCALE,SLOTSCALE,Color.Black);
+        Raylib.DrawRectangle(x,y,SLOTSCALE,SLOTSCALE,Color.DarkGray);
         Rectangle src = new Rectangle(0, 0, emptyHeart.Width, emptyHeart.Height);
         Rectangle dest = new Rectangle(x, y, SLOTSCALE, SLOTSCALE);
         Texture2D currentSprite;
@@ -85,7 +85,7 @@ public static class InventoryRenderer
         int shaderLoc = Raylib.GetShaderLocation(maskingShader, "colorReplacement");
         string[] array = new string[1]{"J"};
         //DrawInventorBackground
-        Raylib.DrawRectangle(x,y,width,height,Color.Black);
+        Raylib.DrawRectangle(x,y,width,height,Color.DarkGray);
         Rectangle src = new Rectangle(0, 0, weaponSprites[WeaponTag.SWORD].Width,weaponSprites[WeaponTag.SWORD].Height);
         //DrawInventoryRect
         foreach ( Weapon weapon in  inventory.getWeapons() )
