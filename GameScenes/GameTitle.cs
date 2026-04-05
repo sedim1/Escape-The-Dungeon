@@ -6,25 +6,38 @@ namespace DungeonCrawlerJam2026.GameScenes;
 
 public class GameTitle : Scene
 {
+    private bool loaded = false;
+    private Music titleMusic = new Music();
     public override void OnEnter()
     {
         Console.WriteLine("GameTitle OnEnter");
+        titleMusic = Raylib.LoadMusicStream("Resources/Audio/GameTitleBackgroudMusic.mp3");
+        Raylib.PlayMusicStream(titleMusic);
+        loaded = true;
     }
 
     public override void OnExit()
     {
         Console.WriteLine("GameTitle OnExit");
+        if (loaded)
+        {
+            Raylib.UnloadMusicStream(titleMusic);
+        }
+        loaded = false;
     }
 
     public override void Update(float deltaTime)
     {
-        if(Raylib.IsKeyPressed(KeyboardKey.A))
+        Raylib.UpdateMusicStream(titleMusic);
+        if(Raylib.IsKeyPressed(KeyboardKey.Enter))
             SceneManager.TriggerChange("main");
     }
 
     public override void Draw()
     {
-        Raylib.DrawText("Hello from game title scene",0,20,24,Color.Black);
-        Raylib.DrawRectangle(200,200,100,200,Color.Green);
+        Global.DrawBackground();
+        Raylib.DrawText("GAME TITLE",183,203,120,Color.White);
+        Raylib.DrawText("GAME TITLE",180,200,120,Color.Red);
+        Raylib.DrawText("ENTER: START GAME",180,400,60,Color.Yellow);
     }
 }

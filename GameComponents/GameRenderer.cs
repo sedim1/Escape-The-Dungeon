@@ -48,15 +48,12 @@ public static class GameRenderer
         Raylib.UnloadModel(wallModel);
         Raylib.UnloadModel(exitModel);
         //Unload enemy sprites
-        if (enemySprites.Count > 0)
-        {
             foreach (var element in enemySprites)
             {
                 Raylib.UnloadTexture(element.Value);
             }
 
             enemySprites.Clear();
-        }
     }
     
     private static void DrawCharactersOnMinipap(List<Character> characters)

@@ -1,6 +1,7 @@
 using System.Numerics;
 using DungeonCrawlerJam2026.Characters;
 using DungeonCrawlerJam2026.Utilties;
+using DungeonCrawlerJam2026.Utilties.Scenes;
 using Raylib_cs;
 
 namespace DungeonCrawlerJam2026.GameComponents;
@@ -82,10 +83,16 @@ public class CharacterManager
         Player p = GetPlayer();
         if (p == null)
             return;
+        if (p.getHealthComponent().isDepleted())
+        {
+            SceneManager.TriggerChange("gameOver");
+            return;
+        }
         if (p.getHealthComponent().getHealth() <= 20 && !Raylib.IsSoundPlaying(lowHealth))
         {
             Raylib.PlaySound(lowHealth);
         }
+        
     }
     
     public List<Character> GetEnemies()

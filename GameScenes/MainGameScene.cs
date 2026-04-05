@@ -22,6 +22,8 @@ public class MainGameScene : Scene
 
     private Music backgroundMusic = new Music();
 
+    private bool loaded = false;
+
     public MainGameScene()
     {
         level = new GameMap();
@@ -31,7 +33,7 @@ public class MainGameScene : Scene
     public override void OnEnter()
     {
         Console.WriteLine("Main Scene OnEnter");
-
+        
         backgroundMusic = Raylib.LoadMusicStream("Resources/Audio/MainGameBackgroundMusic.mp3");
         Raylib.SetMusicVolume(backgroundMusic,0.5f);
         
@@ -64,26 +66,32 @@ public class MainGameScene : Scene
         characterManager.LoadSounds();
         
         Raylib.PlayMusicStream(backgroundMusic);
+
+        loaded = true;
     }
 
     public override void OnExit()
     {
         Console.WriteLine("Main Scene OnExit");
-        
-        InventoryRenderer.End();
-        GameRenderer.EndRenderer();
-        
-        Raylib.UnloadRenderTexture(playerViewport);
-        Raylib.UnloadRenderTexture(mapViewport);
-        
-        Raylib.StopMusicStream(backgroundMusic);
-        Raylib.UnloadMusicStream(backgroundMusic);
-        
-        PlayerController.UnloadControllerSounds();
-        
-        characterManager.DeleteAllCharacters();
-        characterManager.UnloadSounds();
-        Console.WriteLine("Main Scene Finished unloaded resources");
+        if (loaded)
+        {
+            InventoryRenderer.End();
+            GameRenderer.EndRenderer();
+
+            Raylib.UnloadRenderTexture(playerViewport);
+            Raylib.UnloadRenderTexture(mapViewport);
+
+            Raylib.StopMusicStream(backgroundMusic);
+            Raylib.UnloadMusicStream(backgroundMusic);
+
+            PlayerController.UnloadControllerSounds();
+
+            characterManager.DeleteAllCharacters();
+            characterManager.UnloadSounds();
+            Console.WriteLine("Main Scene Finished unloaded resources");
+        }
+
+        loaded = false;
     }
 
     public override void Update(float deltaTime)

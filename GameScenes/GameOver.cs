@@ -35,6 +35,7 @@ public class GameOver : Scene
         if (Raylib.IsKeyPressed(KeyboardKey.Enter))
         {
             
+            SceneManager.TriggerChange("title");
         }
 
         if (Raylib.IsKeyPressed(KeyboardKey.R))
