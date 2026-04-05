@@ -56,49 +56,47 @@ public static class GameRenderer
             enemySprites.Clear();
     }
     
-    private static void DrawCharactersOnMinipap(List<Character> characters)
+    private static void DrawCharactersOnMinipap(CharacterManager characterManager,Vector2i playerPos)
     {
-        foreach (Character character in characters)
+        Raylib.DrawCircleV(characterManager.GetPlayer().worldPosition,Global.GRIDSCALE/2/2,Color.DarkBlue);
+        Raylib.DrawLineEx(characterManager.GetPlayer().worldPosition,characterManager.GetPlayer().worldPosition+Raymath.Vector2Scale(characterManager.GetPlayer().GetDirection(),Global.GRIDSCALE/2),1,Color.DarkBlue);
+
+        foreach (Character character in characterManager.GetEnemies())
         {
-            if (character is Enemy)
-            {
-                Raylib.DrawCircleV(character.worldPosition,Global.GRIDSCALE/2/2,Color.Red);
-            }
-            else if (character is Player)
-            {
-                Raylib.DrawCircleV(character.worldPosition,Global.GRIDSCALE/2/2,Color.Blue);
-                Raylib.DrawLineEx(character.worldPosition,character.worldPosition+Raymath.Vector2Scale((character as Player).GetDirection(),Global.GRIDSCALE/2),1,Color.Blue);
-            }
+            if(playerPos.distanceFrom(character.cellPosition) > 2.0f)
+                continue;
+            Raylib.DrawCircleV(character.worldPosition,Global.GRIDSCALE/2/2,Color.DarkPurple);
         }
     }
 
-    public static void RenderWorld2D(GameMap map, List<Character> characters)
+    public static void RenderWorld2D(GameMap map, CharacterManager characterManager,Vector2i playerPos)
     {
-        for (int y = 0; y < map.GetHeight(); y++)
-        {
-            for (int x = 0; x < map.GetWidth(); x++)
-            {
-                int posX = x * Global.GRIDSCALE;
-                int posY = y * Global.GRIDSCALE;
+        Rectangle srcRect = new Rectangle(Raymath.Vector2Zero(),new Vector2(floorTex.Width,floorTex.Height));
 
-                Rectangle srcRect = new Rectangle(Raymath.Vector2Zero(),new Vector2(floorTex.Width,floorTex.Height));
-                Rectangle destRect = new Rectangle(new Vector2(posX,posY),new Vector2(Global.GRIDSCALE,Global.GRIDSCALE));
-                
-                if (map.GetMap()[y,x] == 1)
+        for (int y = playerPos.Y - 2; y <= playerPos.Y + 2; y++)
+        {
+            for (int x = playerPos.X - 2; x <= playerPos.X + 2; x++)
+            {
+                if (MovementSystem.OutOfBounds(map, new Vector2i(x, y)))
+                    continue;
+                Rectangle destRect = new Rectangle(x * Global.GRIDSCALE, y * Global.GRIDSCALE, Global.GRIDSCALE,
+                    Global.GRIDSCALE);
+                if (map.GetMap()[y, x] == 0)
                 {
-                    Raylib.DrawTexturePro(wallTex,srcRect,destRect,Raymath.Vector2Zero(),0.0f,Color.White);
+                    Raylib.DrawTexturePro(floorTex,srcRect,destRect,Vector2.Zero,0.0f,Color.White);
                 }
-                else if (map.GetMap()[y, x] == 0)
+                if (map.GetMap()[y, x] == 1)
                 {
-                    Raylib.DrawTexturePro(floorTex,srcRect,destRect,Raymath.Vector2Zero(),0.0f,Color.White);
+                    Raylib.DrawTexturePro(wallTex,srcRect,destRect,Vector2.Zero,0.0f,Color.White);
                 }
-                else if (map.GetMap()[y,x] == 2)
+                if (map.GetMap()[y, x] == 2)
                 {
-                    Raylib.DrawTexturePro(exitTex,srcRect,destRect,Raymath.Vector2Zero(),0.0f,Color.White);
+                    Raylib.DrawTexturePro(exitTex,srcRect,destRect,Vector2.Zero,0.0f,Color.White);
                 }
             }
         }
-        DrawCharactersOnMinipap(characters);
+        
+        DrawCharactersOnMinipap(characterManager,playerPos);
     }
     
 

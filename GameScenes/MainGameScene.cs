@@ -156,7 +156,7 @@ public class MainGameScene : Scene
         Raylib.BeginTextureMode(mapViewport);
         Raylib.ClearBackground(Color.Black);
         Raylib.BeginMode2D(camera2D);
-        GameRenderer.RenderWorld2D(level,characterManager.GetCharacters());
+        GameRenderer.RenderWorld2D(level,characterManager,characterManager.GetPlayer().cellPosition);
         Raylib.EndMode2D();
         Raylib.EndTextureMode();
         Vector2 screenPos = new Vector2(750, 10);
