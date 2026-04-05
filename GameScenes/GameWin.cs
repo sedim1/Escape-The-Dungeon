@@ -27,8 +27,8 @@ public class GameWin : Scene
     {
         Global.DrawBackground();
         Raylib.DrawText("YOU ESCAPED\nALIVE...",183,203,90,Color.White);
-        Raylib.DrawText("YOU ESCAPED\nALIVE...",180,200,90,Color.Yellow);
-        Raylib.DrawText("THANK YOU FOR PLAYING MY GAME!",180,500,30,Color.Yellow);
-        Raylib.DrawText("PRESS ENTER TO CONTINUE",180,564,30,Color.Yellow);
+        Raylib.DrawText("YOU ESCAPED\nALIVE...",180,200,90,Color.Red);
+        Raylib.DrawText("THANK YOU FOR PLAYING MY GAME!",180,500,30,Color.White);
+        Raylib.DrawText("PRESS ENTER TO CONTINUE",180,564,30,Color.White);
     }
 }

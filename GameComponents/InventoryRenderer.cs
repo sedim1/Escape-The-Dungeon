@@ -55,7 +55,7 @@ public static class InventoryRenderer
 
     public static void renderHealCoolDown(CooldownComponent cooldownComponent,int x, int y)
     {
-        Raylib.DrawRectangle(x,y,SLOTSCALE,SLOTSCALE,Color.DarkGray);
+        Raylib.DrawRectangle(x,y,SLOTSCALE,SLOTSCALE,Color.Black);
         Rectangle src = new Rectangle(0, 0, emptyHeart.Width, emptyHeart.Height);
         Rectangle dest = new Rectangle(x, y, SLOTSCALE, SLOTSCALE);
         Texture2D currentSprite;
@@ -74,7 +74,7 @@ public static class InventoryRenderer
         }
         Raylib.DrawTexturePro(currentSprite,src,dest,Vector2.Zero,0.0f,Color.White);
         Raylib.DrawRectangleLinesEx(new Rectangle(x,y,SLOTSCALE,SLOTSCALE),3.0f,Color.White);
-        Raylib.DrawText("K",x+5,y+5,26,Color.Yellow);
+        Raylib.DrawText("K",x+5,y+SLOTSCALE - 26,26,Color.White);
     }
     
     public static void RenderInventory(Inventory inventory,int x,int y)
@@ -85,7 +85,7 @@ public static class InventoryRenderer
         int shaderLoc = Raylib.GetShaderLocation(maskingShader, "colorReplacement");
         string[] array = new string[1]{"J"};
         //DrawInventorBackground
-        Raylib.DrawRectangle(x,y,width,height,Color.DarkGray);
+        Raylib.DrawRectangle(x,y,width,height,Color.Black);
         Rectangle src = new Rectangle(0, 0, weaponSprites[WeaponTag.SWORD].Width,weaponSprites[WeaponTag.SWORD].Height);
         //DrawInventoryRect
         foreach ( Weapon weapon in  inventory.getWeapons() )
@@ -102,7 +102,7 @@ public static class InventoryRenderer
                 Raylib.DrawRectangleLinesEx(destRect,3.0f,Color.White);
             else
                 Raylib.DrawRectangleLinesEx(destRect,3.0f,Color.Red);
-            Raylib.DrawText("J",x+(i*SLOTSCALE) + 5,y + 5,26,Color.Yellow);
+            Raylib.DrawText("J",x+(i*SLOTSCALE) + 5,y + SLOTSCALE - 26,26,Color.White);
             i += 1;
         }
     }

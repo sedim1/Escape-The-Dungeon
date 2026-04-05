@@ -107,7 +107,7 @@ public static class PlayerController
         if (Raylib.IsKeyPressed(KeyboardKey.K) && player.getCooldownComponent().hasFinsished())
         {
             Raylib.PlaySound(healSound);
-            player.getHealthComponent().increase(40);
+            player.getHealthComponent().increase(25);
             player.getCooldownComponent().restart();
         }
         

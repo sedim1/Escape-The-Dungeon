@@ -58,12 +58,18 @@ public static class GameRenderer
     
     private static void DrawCharactersOnMinipap(CharacterManager characterManager,Vector2i playerPos)
     {
+        Dictionary<EnemyTag,Color> colors= new Dictionary<EnemyTag,Color>()
+        {
+            { EnemyTag.BLUE,new Color(20,52,88,255) },
+            { EnemyTag.RED,new Color(119,27,9,255) }, 
+            { EnemyTag.GREEN,new Color(60,92,54,255) },
+        };
         Raylib.DrawCircleV(characterManager.GetPlayer().worldPosition,Global.GRIDSCALE/2/2,Color.DarkBlue);
         foreach (Character character in characterManager.GetEnemies())
         {
             if(playerPos.distanceFrom(character.cellPosition) > 2.5f)
                 continue;
-            Raylib.DrawCircleV(character.worldPosition,Global.GRIDSCALE/2/2,Color.DarkPurple);
+            Raylib.DrawCircleV(character.worldPosition,Global.GRIDSCALE/2/2,colors[(character as Enemy).tag]);
         }
     }
 
