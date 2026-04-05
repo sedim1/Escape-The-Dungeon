@@ -49,7 +49,7 @@ public class GameOver : Scene
         Global.DrawBackground();
         Raylib.DrawText("GAME OVER",183,203,120,Color.White);
         Raylib.DrawText("GAME OVER",180,200,120,Color.Red);
-        Raylib.DrawText("ENTER: GameTitle",180,400,60,Color.Yellow);
-        Raylib.DrawText("R: Restart",180,464,60,Color.Yellow);
+        Raylib.DrawText("ENTER: GameTitle",180,400,30,Color.Yellow);
+        Raylib.DrawText("R: Restart",180,464,30,Color.Yellow);
     }
 }

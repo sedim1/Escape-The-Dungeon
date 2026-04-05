@@ -96,6 +96,11 @@ public class MainGameScene : Scene
 
     public override void Update(float deltaTime)
     {
+        if (characterManager.CheckPlayerWin(level))
+        {
+            SceneManager.TriggerChange("win");
+            return;
+        }
         Raylib.UpdateMusicStream(backgroundMusic);
         characterManager.checkPlayerDead();
         if (!Raylib.IsMusicStreamPlaying(backgroundMusic))

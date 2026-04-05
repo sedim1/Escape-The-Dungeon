@@ -37,9 +37,14 @@ public class GameMap
             
     }
 
+    public bool positionIsExit(int x, int y)
+    {
+        return map[y, x] == 2;
+    }
+
     public bool positionIsFloor(int x, int y)
     {
-        return map[y,x] == 0;
+        return map[y,x] == 0 || map[y,x] == 2;
     }
 
     public int GetWidth()

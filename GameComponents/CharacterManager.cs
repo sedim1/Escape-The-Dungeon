@@ -115,4 +115,10 @@ public class CharacterManager
         enemies.Reverse();
         return enemies;
     }
+
+    public bool CheckPlayerWin(GameMap map)
+    {
+        Vector2i playerPos = GetPlayer().cellPosition;
+        return map.positionIsExit(playerPos.X,playerPos.Y);
+    }
 }

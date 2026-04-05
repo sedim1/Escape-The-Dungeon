@@ -37,7 +37,7 @@ public class GameTitle : Scene
     {
         Global.DrawBackground();
         Raylib.DrawText("GAME TITLE",183,203,120,Color.White);
-        Raylib.DrawText("GAME TITLE",180,200,120,Color.Red);
-        Raylib.DrawText("ENTER: START GAME",180,400,60,Color.Yellow);
+        Raylib.DrawText("GAME TITLE",180,200,120,Color.DarkGreen);
+        Raylib.DrawText("ENTER: START GAME",180,400,30,Color.Yellow);
     }
 }

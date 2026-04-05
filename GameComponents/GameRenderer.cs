@@ -116,6 +116,10 @@ public static class GameRenderer
                     Raylib.DrawModel(floorModel,new Vector3(posX,0.0f,posZ),1.0f,Color.White);
                     Raylib.DrawModel(wallModel,new Vector3(posX,Global.GRIDSCALE,posZ),1.0f,Color.White);
                 }
+                else if (map.GetMap()[y, x] == 2)
+                {
+                    Raylib.DrawModel(exitModel,new Vector3(posX,0.0f,posZ),1.0f,Color.White);
+                }
                 else
                 {
                     Raylib.DrawModel(wallModel,new Vector3(posX,0.0f,posZ),1.0f,Color.White);
