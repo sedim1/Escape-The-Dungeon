@@ -61,5 +61,4 @@ public class GameMap
     {
         return map;
     }
-    
 }

@@ -59,8 +59,30 @@ public class MainGameScene : Scene
         characterManager.AddCharacter(new Player(new Vector2i(1,1),angleStart));
         axis = angleStart;
         characterManager.LoadSounds();
+        
+        characterManager.AddCharacter(new BlueEnemy(new Vector2i(8,8)));
+        characterManager.AddCharacter(new BlueEnemy(new Vector2i(13,23)));
+        characterManager.AddCharacter(new BlueEnemy(new Vector2i(22,22)));
+        characterManager.AddCharacter(new BlueEnemy(new Vector2i(28,15)));
+        characterManager.AddCharacter(new BlueEnemy(new Vector2i(9,25)));
+        characterManager.AddCharacter(new BlueEnemy(new Vector2i(32,33)));
+        
+        characterManager.AddCharacter(new GreenEnemy(new Vector2i(12,13)));
+        characterManager.AddCharacter(new GreenEnemy(new Vector2i(20,18)));
+        characterManager.AddCharacter(new GreenEnemy(new Vector2i(6,9)));
+        characterManager.AddCharacter(new GreenEnemy(new Vector2i(4,16)));
+        characterManager.AddCharacter(new GreenEnemy(new Vector2i(13,23)));
+        characterManager.AddCharacter(new GreenEnemy(new Vector2i(27,13)));
+        
+        
+        characterManager.AddCharacter(new RedEnemy(new Vector2i(33,33)));
+        characterManager.AddCharacter(new RedEnemy(new Vector2i(1,33)));
+        characterManager.AddCharacter(new RedEnemy(new Vector2i(11,9)));
+        characterManager.AddCharacter(new RedEnemy(new Vector2i(15,13)));
+        characterManager.AddCharacter(new RedEnemy(new Vector2i(21,20)));
+        characterManager.AddCharacter(new RedEnemy(new Vector2i(8,25)));
+        
         Raylib.PlayMusicStream(backgroundMusic);
-
         loaded = true;
     }
 
