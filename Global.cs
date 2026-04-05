@@ -12,7 +12,7 @@ public static class Global
     {
         Rectangle src =  new Rectangle(0, 0, background.Width, background.Height);
         Rectangle dest = new Rectangle(0, 0, 1024, 768);
-        Raylib.DrawTexturePro(background,src,dest,Vector2.Zero,0.0f,Color.DarkGray);
+        Raylib.DrawTexturePro(background,src,dest,Vector2.Zero,0.0f,Color.White);
     }
 
     private static float shortAngleDist(float from, float to)

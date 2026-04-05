@@ -24,6 +24,8 @@ public class MainGameScene : Scene
 
     private bool loaded = false;
 
+    private Texture2D typeRef = new Texture2D();
+
     public MainGameScene()
     {
         level = new GameMap();
@@ -41,6 +43,8 @@ public class MainGameScene : Scene
         
         GameRenderer.StartRenderer();
         InventoryRenderer.Init();
+
+        typeRef = Raylib.LoadTexture("Resources/Sprites/typesReference.png");
         
         mapViewport = Raylib.LoadRenderTexture(250, 250);
         camera2D = new Camera2D();
@@ -54,7 +58,7 @@ public class MainGameScene : Scene
         camera3D.FovY = 45.0f;
         camera3D.Projection = CameraProjection.Perspective;
         camera3D.Up =  Vector3.UnitY;
-        float angleStart = 0.0f;
+        float angleStart = 90.0f;
         level.LoadMap("Resources/gamemap.json");
         characterManager.AddCharacter(new Player(new Vector2i(1,1),angleStart));
         axis = angleStart;
@@ -96,6 +100,7 @@ public class MainGameScene : Scene
 
             Raylib.UnloadRenderTexture(playerViewport);
             Raylib.UnloadRenderTexture(mapViewport);
+            Raylib.UnloadTexture(typeRef);
 
             Raylib.StopMusicStream(backgroundMusic);
             Raylib.UnloadMusicStream(backgroundMusic);
@@ -140,6 +145,7 @@ public class MainGameScene : Scene
         InventoryRenderer.renderHealCoolDown(characterManager.GetPlayer().getCooldownComponent(),750+84,270);
         Raylib.DrawText("Health:",750,380-26,26,Color.Yellow);
         GameRenderer.RenderHealthBar(characterManager.GetPlayer(),750,380,250,50);
+        Raylib.DrawTexturePro(typeRef,new Rectangle(0,0,typeRef.Width,typeRef.Height),new Rectangle(800,430,124,124),Vector2.Zero,0.0f,Color.White);
         if( characterManager.GetPlayer().getEnemyInFront(characterManager.GetCharacters()) != null)
         {
             Raylib.DrawText("Enemy Health:",750,620-26,26,Color.Yellow);

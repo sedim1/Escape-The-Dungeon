@@ -45,6 +45,7 @@ namespace DungeonCrawlerJam2026;
         {
             //Add scenes the game will run throughout its lifetime
             SceneManager.AddScene(new GameTitle(),"title");
+            SceneManager.AddScene(new HowToPlay(),"howTo");
             SceneManager.AddScene(new MainGameScene(),"main");
             SceneManager.AddScene(new GameWin(),"win");
             SceneManager.AddScene(new GameOver(),"gameOver");

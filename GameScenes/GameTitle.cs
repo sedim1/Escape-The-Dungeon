@@ -31,14 +31,17 @@ public class GameTitle : Scene
         Raylib.UpdateMusicStream(titleMusic);
         if(Raylib.IsKeyPressed(KeyboardKey.Enter))
             SceneManager.TriggerChange("main");
+        if(Raylib.IsKeyPressed(KeyboardKey.Tab))
+            SceneManager.TriggerChange("howTo");
     }
 
     public override void Draw()
     {
         Global.DrawBackground();
         Raylib.DrawText("ESCAPE \nTHE DUNGEON",183,203,90,Color.White);
-        Raylib.DrawText("ESCAPE \nTHE DUNGEON",180,200,90,Color.DarkPurple);
-        Raylib.DrawText("ENTER: START GAME", 180, 400, 30, Color.Yellow);
-        Raylib.DrawText("Game made by Sedim",850,740,16,Color.Yellow);
+        Raylib.DrawText("ESCAPE \nTHE DUNGEON",180,200,90,Color.Red);
+        Raylib.DrawText("ENTER: START GAME", 180, 400, 30, Color.White);
+        Raylib.DrawText("TAB: HOW TO PLAY", 180, 430, 30, Color.White);
+        Raylib.DrawText("Game made by Sedim",850,740,16,Color.White);
     }
 }
