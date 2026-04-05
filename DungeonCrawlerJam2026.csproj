@@ -16,4 +16,8 @@
       <None Include="Resources\Shaders\mask.glsl" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Screenshots\" />
+    </ItemGroup>
+
 </Project>
