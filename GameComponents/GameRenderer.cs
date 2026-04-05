@@ -60,10 +60,9 @@ public static class GameRenderer
     {
         Raylib.DrawCircleV(characterManager.GetPlayer().worldPosition,Global.GRIDSCALE/2/2,Color.DarkBlue);
         Raylib.DrawLineEx(characterManager.GetPlayer().worldPosition,characterManager.GetPlayer().worldPosition+Raymath.Vector2Scale(characterManager.GetPlayer().GetDirection(),Global.GRIDSCALE/2),1,Color.DarkBlue);
-
         foreach (Character character in characterManager.GetEnemies())
         {
-            if(playerPos.distanceFrom(character.cellPosition) > 2.0f)
+            if(playerPos.distanceFrom(character.cellPosition) > 2.5f)
                 continue;
             Raylib.DrawCircleV(character.worldPosition,Global.GRIDSCALE/2/2,Color.DarkPurple);
         }

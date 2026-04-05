@@ -64,7 +64,7 @@ public class BlueEnemy : Enemy
         attackComponent = new AttackComponent(new WaterTypeComponent(), 5, 1);
         typeComponent = new WaterTypeComponent();
         this.healthComponent = new HealthComponent(100, 100);
-        cooldownComponent = new CooldownComponent(1);
+        cooldownComponent = new CooldownComponent(2);
     }
 }
 

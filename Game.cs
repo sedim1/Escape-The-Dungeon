@@ -48,7 +48,7 @@ namespace DungeonCrawlerJam2026;
             SceneManager.AddScene(new MainGameScene(),"main");
             SceneManager.AddScene(new GameWin(),"win");
             SceneManager.AddScene(new GameOver(),"gameOver");
-            SceneManager.TriggerChange("main");
+            SceneManager.TriggerChange("title");
             //Start Game loop
             while (!Raylib.WindowShouldClose())
             {

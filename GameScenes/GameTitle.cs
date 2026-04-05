@@ -36,8 +36,9 @@ public class GameTitle : Scene
     public override void Draw()
     {
         Global.DrawBackground();
-        Raylib.DrawText("GAME TITLE",183,203,120,Color.White);
-        Raylib.DrawText("GAME TITLE",180,200,120,Color.DarkGreen);
-        Raylib.DrawText("ENTER: START GAME",180,400,30,Color.Yellow);
+        Raylib.DrawText("ESCAPE \nTHE DUNGEON",183,203,90,Color.White);
+        Raylib.DrawText("ESCAPE \nTHE DUNGEON",180,200,90,Color.DarkPurple);
+        Raylib.DrawText("ENTER: START GAME", 180, 400, 30, Color.Yellow);
+        Raylib.DrawText("Game made by Sedim",850,740,16,Color.Yellow);
     }
 }
